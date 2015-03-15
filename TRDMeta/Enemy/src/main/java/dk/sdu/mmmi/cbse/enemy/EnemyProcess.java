@@ -6,31 +6,32 @@
 
 package dk.sdu.mmmi.cbse.enemy;
 
+import com.decouplink.Context;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.ENEMY;
-
+import dk.sdu.mmmi.cbse.common.services.IUpdateService;
 
 /**
  *
  * @author SoA
  */
-public class EnemyFactory{ 
-    
-    
-    public static Entity createEnemy(){
-        Entity enemy = new Entity();
+public class EnemyProcess implements IUpdateService {
+
+    @Override
+    public void update(Object o, Entity entity) {
         
-        //Add stuff to enemy (Via common data)
-        context(enemy).add(EntityType.class, ENEMY);
-        context(enemy).add(ImageAsset.class, new ImageAsset("images/DK.png"));
+        Context enemyCtx = context(entity);
         
-        //Finally return to start();
-        return enemy;
+        if (enemyCtx.one(EntityType.class).equals(ENEMY)) {
+            //All logic regarding enemy here, pathfinding and taking damage checks
+            //move();
+
+            
+        }
+
+        
     }
-
     
-
 }

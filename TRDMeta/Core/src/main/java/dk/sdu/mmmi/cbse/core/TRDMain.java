@@ -6,11 +6,10 @@
 
 package dk.sdu.mmmi.cbse.core;
 
+import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.LevelType;
-import dk.sdu.mmmi.cbse.common.services.IDrawable;
-import dk.sdu.mmmi.cbse.common.services.IFactory;
-import dk.sdu.mmmi.cbse.common.services.IUpdateable;
+import dk.sdu.mmmi.cbse.common.services.IContentService;
+import dk.sdu.mmmi.cbse.common.services.IUpdateService;
 import java.util.ArrayList;
 import java.util.List;
 import org.openide.util.Lookup;
@@ -26,45 +25,36 @@ public class TRDMain extends Game.Default{
 
     Layer rootLayer;
     List<Entity> EntityArr;
+    Object world;
     
     public TRDMain(int updateRate) {
         super(updateRate);
-        System.out.println("Updateable services located: " +Lookup.getDefault().lookupAll(IUpdateable.class).size());
-        System.out.println("Drawable services located: " +Lookup.getDefault().lookupAll(IDrawable.class).size());
-        System.out.println("Factory services located: " +Lookup.getDefault().lookupAll(IFactory.class).size());
     }
 
     @Override
     public void init() {
         rootLayer = graphics().rootLayer();
         EntityArr = new ArrayList<>();
-        LevelOne();
+        world = new Object();
+        System.out.println("ContentServices located: " +Lookup.getDefault().lookupAll(IContentService.class).size());
+        System.out.println("UpdateableServices located: " +Lookup.getDefault().lookupAll(IUpdateService.class).size());
         
     }
     
     @Override
     public void update(int delta) {
-         for(IUpdateable service : Lookup.getDefault().lookupAll(IUpdateable.class)){
-             for(Entity e : EntityArr){
-                service.update(delta,e);
-             }
-         }
+        for(IUpdateService service : Lookup.getDefault().lookupAll(IUpdateService.class)){
+            for (Entity e : context(world).all(Entity.class)) {
+            
+            }
+        }
     }
     
     @Override
     public void paint(float alpha){ 
-        for(IDrawable service : Lookup.getDefault().lookupAll(IDrawable.class)){
-            for(Entity e : EntityArr){
-                service.paint(alpha,e);
-            }
-             
+        for (Entity e : context(world).all(Entity.class)) {
+            
         }
     }
     
-    public void LevelOne(){ //Burde laves mere elegant
-        for(IFactory factory : Lookup.getDefault().lookupAll(IFactory.class)){
-            System.out.println("level one method");
-            EntityArr = factory.createFromFactory(LevelType.LEVEL_1);
-        }
-    }
 }

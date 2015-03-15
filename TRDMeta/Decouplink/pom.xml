@@ -6,7 +6,7 @@
         <artifactId>TRDMeta-parent</artifactId>
         <version>1.8.5</version>
     </parent>
-    <artifactId>Enemy</artifactId>
+    <artifactId>Decouplink</artifactId>
     <packaging>nbm</packaging>
     <build>
         <plugins>
@@ -14,7 +14,12 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
                 <extensions>true</extensions>
-                <configuration></configuration>
+                <configuration>
+                    <publicPackages>
+                        <publicPackage>com.decouplink</publicPackage>
+                        <publicPackage>com.decouplink.core</publicPackage>
+                    </publicPackages>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -32,14 +37,14 @@
             <version>${netbeans.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Common</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+            <version>RELEASE80</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Decouplink</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>16.0.1</version>
         </dependency>
     </dependencies>
     <properties>

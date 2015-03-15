@@ -61,6 +61,7 @@
 		<module>Assets</module>
         <module>Common</module>
         <module>Enemy</module>
+        <module>Decouplink</module>
     </modules>
 
     <properties>

@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 
-package dk.sdu.mmmi.cbse.common.services;
-
-import dk.sdu.mmmi.cbse.common.data.Entity;
+package dk.sdu.mmmi.cbse.common.data.types;
 
 /**
  *
  * @author SoA
  */
-public interface IUpdateable {
-    public void update(int delta, Entity et);
+public enum BehaviorType {
+    ASTAR, SHOOT, HIT, PLACING;
 }

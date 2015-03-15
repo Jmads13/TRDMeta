@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 
-package dk.sdu.mmmi.cbse.common.services;
-
-import dk.sdu.mmmi.cbse.common.data.Entity;
+package dk.sdu.mmmi.cbse.common.data.types;
 
 /**
  *
  * @author SoA
  */
-public interface IDrawable {
-    public void paint(float alpha, Entity et);
+public enum EntityType {
+    TOWER, ENEMY, BULLET;
 }
