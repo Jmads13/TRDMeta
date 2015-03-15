@@ -25,6 +25,7 @@ public class Enemy implements IContentService{
         Entity e = EnemyFactory.createEnemy();
         Link<Entity> el = context(world).add(Entity.class, e);
         entities.add(el);
+        System.out.println("Enemy added");
     }
 
     @Override
