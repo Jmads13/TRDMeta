@@ -39,8 +39,8 @@ public class EnemyFactory{
         context(enemy).add(Hitbox.class, new Hitbox()); //Not yet implemented
         context(enemy).add(Speed.class, new Speed(1));
         context(enemy).add(Position.class, new Position(0,0));
-        context(enemy).add(Velocity.class, new Velocity(0,1));
-        context(enemy).add(Scale.class, new Scale());
+        context(enemy).add(Velocity.class, new Velocity(1,1));
+        context(enemy).add(Scale.class, new Scale(0.5f,0.5f));
         context(enemy).add(Radius.class, new Radius(10));
         context(enemy).add(BehaviorType.class, ASTAR);
         

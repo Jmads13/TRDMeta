@@ -58,7 +58,7 @@ public class TRDMain extends Game.Default{
     public void update(int delta) {
         for(IUpdateService service : Lookup.getDefault().lookupAll(IUpdateService.class)){
             for (Entity e : context(world).all(Entity.class)) {
-            
+                service.update(world, e);
             }
         }
     }
