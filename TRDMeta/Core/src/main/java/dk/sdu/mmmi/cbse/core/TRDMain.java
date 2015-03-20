@@ -61,10 +61,21 @@ public class TRDMain extends Game.Default{
                 service.update(world, e);
             }
         }
+        ////TODO
+        //For IMapService service : Lookup.getDefault(IMapService.class)<-//TODO
+        //{
+        //  Tiles[] tiles = service.generatePath();
+        //}
+        //
     }
     
     @Override
     public void paint(float alpha){ 
+        ////TODO
+        //for(Tiles t : tiles){
+        //create imageLayer ( t.getImageAsset());
+        //rootlayer.add(created tile)
+        //}
         for (Entity e : context(world).all(Entity.class)) {
             
             ImageLayer view = context(e).one(ImageLayer.class);

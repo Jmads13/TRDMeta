@@ -62,6 +62,7 @@
         <module>Common</module>
         <module>Enemy</module>
         <module>Decouplink</module>
+        <module>Movement</module>
     </modules>
 
     <properties>
