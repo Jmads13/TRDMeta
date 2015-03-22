@@ -29,7 +29,7 @@ import static dk.sdu.mmmi.cbse.common.data.types.EntityType.ENEMY;
 public class EnemyFactory{ 
     
     
-    public static Entity createEnemy(){
+    public static Entity createEnemy(Position pos, Velocity direction){
         Entity enemy = new Entity();
         
         //Add stuff to enemy (Via common data)
@@ -38,8 +38,8 @@ public class EnemyFactory{
         context(enemy).add(Health.class, new Health(100));
         context(enemy).add(Hitbox.class, new Hitbox()); //Not yet implemented
         context(enemy).add(Speed.class, new Speed(1));
-        context(enemy).add(Position.class, new Position(0,0));
-        context(enemy).add(Velocity.class, new Velocity(1,1));
+        context(enemy).add(Position.class, pos);
+        context(enemy).add(Velocity.class, direction);
         context(enemy).add(Scale.class, new Scale(0.5f,0.5f));
         context(enemy).add(Radius.class, new Radius(10));
         context(enemy).add(BehaviorType.class, ASTAR);

@@ -13,6 +13,7 @@ import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Rotation;
 import dk.sdu.mmmi.cbse.common.data.Scale;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
+import dk.sdu.mmmi.cbse.common.services.ILevelContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class TRDMain extends Game.Default{
     GroupLayer rootLayer;
     List<Entity> EntityArr;
     Object world;
+    int currLevel;
     
     public TRDMain(int updateRate) {
         super(updateRate);
@@ -44,12 +46,20 @@ public class TRDMain extends Game.Default{
         rootLayer = graphics().rootLayer();
         EntityArr = new ArrayList<>();
         world = new Object();
+        currLevel = 2;
         
         for(IContentService service : Lookup.getDefault().lookupAll(IContentService.class)){
             service.add(world);
         }
         
+        //new type of ContentService for loading specific things per level
+        //this would include classes like Enemy and Map as those depend on what level you're playing
+        for(ILevelContentService service: Lookup.getDefault().lookupAll(ILevelContentService.class)) {
+            service.add(world, currLevel);
+        }
+        
         System.out.println("ContentServices located: " +Lookup.getDefault().lookupAll(IContentService.class).size());
+        System.out.println("LevelContentServices located: " +Lookup.getDefault().lookupAll(ILevelContentService.class).size());
         System.out.println("UpdateableServices located: " +Lookup.getDefault().lookupAll(IUpdateService.class).size());
         
     }
