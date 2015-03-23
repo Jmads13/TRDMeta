@@ -12,6 +12,8 @@ import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Rotation;
 import dk.sdu.mmmi.cbse.common.data.Scale;
+import dk.sdu.mmmi.cbse.common.data.types.EntityType;
+import static dk.sdu.mmmi.cbse.common.data.types.EntityType.ENEMY;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import dk.sdu.mmmi.cbse.common.services.ILevelContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
@@ -25,6 +27,7 @@ import playn.core.ImageLayer;
 import playn.core.Layer;
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
+import playn.core.Pointer;
 
 /**
  *
@@ -33,7 +36,6 @@ import static playn.core.PlayN.graphics;
 public class TRDMain extends Game.Default{
 
     GroupLayer rootLayer;
-    List<Entity> EntityArr;
     Object world;
     int currLevel;
     
@@ -44,7 +46,6 @@ public class TRDMain extends Game.Default{
     @Override
     public void init() {
         rootLayer = graphics().rootLayer();
-        EntityArr = new ArrayList<>();
         world = new Object();
         currLevel = 2;
         
@@ -109,7 +110,7 @@ public class TRDMain extends Game.Default{
         }
     }
     
-    private ImageLayer createImageAsset(Entity entity) {
+    private ImageLayer createImageAsset(final Entity entity) {
 
         ImageAsset sprite = context(entity).one(ImageAsset.class);
 
@@ -122,7 +123,17 @@ public class TRDMain extends Game.Default{
 
         context(entity).add(ImageLayer.class, viewLayer);
         rootLayer.add(viewLayer);
-
+        
+        
+        //MouseListener added to eneny, for future use in buttons/menu
+        if(context(entity).one(EntityType.class).equals(ENEMY)){
+            viewLayer.addListener(new Pointer.Adapter() {
+                public void onPointerStart(Pointer.Event event) {
+                    entity.setDestroyed(true);
+                }
+            });
+        }
+        
         return viewLayer;
     }
     
