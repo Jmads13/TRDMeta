@@ -63,7 +63,8 @@
         <module>Decouplink</module>
         <module>Movement</module>
     <module>Tower</module>
-  </modules>
+        <module>Player</module>
+    </modules>
 
     <properties>
         <netbeans.version>RELEASE80</netbeans.version>
