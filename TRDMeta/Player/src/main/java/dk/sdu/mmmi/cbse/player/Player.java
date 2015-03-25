@@ -40,7 +40,6 @@ public class Player implements IContentService{
 
         context(player).add(EntityType.class, PLAYER);
         context(player).add(Position.class, new Position(0, 0));
-
         return player;
     }
     

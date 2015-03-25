@@ -25,7 +25,7 @@ public class PlayerProcess implements IUpdateService{
         Context ctx = context(entity);
         if (ctx.one(EntityType.class).equals(PLAYER)){
             Position p = context(entity).one(Position.class);
-            System.out.println(p.x + ", "+ p.y);
+            System.out.println(p.x + ", "+ p.y); //Mouse cords
         }
     }
 }

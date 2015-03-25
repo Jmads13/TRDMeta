@@ -32,6 +32,7 @@ public class EnemyFactory{
     public static Entity createEnemy(Position pos, Velocity direction){
         Entity enemy = new Entity();
         
+        //Should be moved to Map component, or whatever generates the level
         //Add stuff to enemy (Via common data)
         context(enemy).add(EntityType.class, ENEMY);
         context(enemy).add(ImageAsset.class, new ImageAsset("images/DK.png"));
