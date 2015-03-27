@@ -64,6 +64,7 @@
         <module>Movement</module>
     <module>Tower</module>
         <module>Player</module>
+        <module>Map</module>
     </modules>
 
     <properties>
