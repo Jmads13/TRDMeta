@@ -9,12 +9,12 @@ import com.decouplink.DisposableList;
 import com.decouplink.Link;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
+import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
+import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.PLACING;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
-import java.awt.Point;
 
 /**
  *
@@ -39,6 +39,7 @@ public class Player implements IContentService{
         Entity player = new Entity();
 
         context(player).add(EntityType.class, PLAYER);
+        context(player).add(BehaviorType.class, PLACING);
         context(player).add(Position.class, new Position(0, 0));
         return player;
     }
