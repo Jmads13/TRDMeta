@@ -19,6 +19,7 @@
                         <publicPackage>dk.sdu.mmmi.cbse.common.services</publicPackage>
                         <publicPackage>dk.sdu.mmmi.cbse.common.data</publicPackage>
                         <publicPackage>dk.sdu.mmmi.cbse.common.data.types</publicPackage>
+                        <publicPackage>dk.sdu.mmmi.cbse.common.helper</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>
