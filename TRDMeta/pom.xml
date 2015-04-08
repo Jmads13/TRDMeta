@@ -65,6 +65,7 @@
     <module>Tower</module>
         <module>Player</module>
         <module>Map</module>
+        <module>Store</module>
     </modules>
 
     <properties>

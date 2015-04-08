@@ -6,21 +6,22 @@
 
 package dk.sdu.mmmi.cbse.core;
 
-import com.decouplink.Utilities;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Rotation;
 import dk.sdu.mmmi.cbse.common.data.Scale;
+import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
+import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.PLACING;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.types.LevelType;
 import static dk.sdu.mmmi.cbse.common.data.types.LevelType.ONE;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
-import dk.sdu.mmmi.cbse.common.services.ILevelContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
 import org.openide.util.Lookup;
+import playn.core.Color;
 import playn.core.Game;
 import playn.core.GroupLayer;
 import playn.core.Image;
@@ -28,7 +29,7 @@ import playn.core.ImageLayer;
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 import static playn.core.PlayN.pointer;
-import playn.core.Pointer;
+import playn.core.SurfaceImage;
 
 /**
  *
@@ -38,7 +39,6 @@ public class TRDMain extends Game.Default{
 
     private GroupLayer rootLayer;
     private Object world;
-    private int currLevel;
     private Entity player;
     
     public TRDMain(int updateRate) {
@@ -49,7 +49,9 @@ public class TRDMain extends Game.Default{
     public void init() {
         rootLayer = graphics().rootLayer();
         world = new Object();
-        currLevel = 2;
+        System.out.println("Height: " +graphics().height());
+        System.out.println("Width: " +graphics().width());
+        //Init on level 1
         context(world).add(LevelType.class, ONE);
         
         
@@ -95,10 +97,11 @@ public class TRDMain extends Game.Default{
             Rotation r = context(e).one(Rotation.class);
             Scale s = context(e).one(Scale.class);
             
-            //if view isn't set, create it
-            //view = ImageLayer
-            //Then manipulate it
-            if(context(e).one(EntityType.class) != PLAYER){
+            if(context(e).one(EntityType.class) == PLAYER){
+                if(context(e).one(BehaviorType.class) == PLACING){
+                    //Draw placing grid/fillRect
+                }
+            }else{
                 if (view == null) {
                     view = createImageAsset(e);
                 }
@@ -129,4 +132,5 @@ public class TRDMain extends Game.Default{
         
         return viewLayer;
     }
+    
 }

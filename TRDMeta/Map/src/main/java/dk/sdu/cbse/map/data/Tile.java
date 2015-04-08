@@ -1,14 +1,14 @@
 package dk.sdu.cbse.map.data;
 
-import static dk.sdu.mmmi.cbse.map.helpers.Artist.drawQuadText;
-import static dk.sdu.mmmi.cbse.map.helpers.Artist.quickLoad;
+//import static dk.sdu.mmmi.cbse.map.helpers.Artist.drawQuadText;
+//import static dk.sdu.mmmi.cbse.map.helpers.Artist.quickLoad;
 
-import org.newdawn.slick.opengl.Texture;
+//import org.newdawn.slick.opengl.Texture;
 
 public class Tile {
 
 	private float x, y, width, height;
-	private Texture texture;
+//	private Texture texture;
 	private TileType type;
 	
 	public Tile(float x, float y, float width, float height, TileType type) {
@@ -16,13 +16,13 @@ public class Tile {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.texture = texture;
-		this.type = type;
-		this.texture = quickLoad(type.textureName);
+//		this.texture = texture;
+//		this.type = type;
+//		this.texture = quickLoad(type.textureName);
 	}
 	
 	public void draw(){
-		drawQuadText(texture, x, y, width, height);
+//		drawQuadText(texture, x, y, width, height);
 	}
 
 	public float getX() {
@@ -57,13 +57,13 @@ public class Tile {
 		this.height = height;
 	}
 
-	public Texture getTexture() {
-		return texture;
-	}
-
-	public void setTexture(Texture texture) {
-		this.texture = texture;
-	}
+//	public Texture getTexture() {
+//		return texture;
+//	}
+//
+//	public void setTexture(Texture texture) {
+//		this.texture = texture;
+//	}
 
 	public TileType getType() {
 		return type;

@@ -32,8 +32,7 @@ public class Enemy implements IContentService {
                 for (int i = 0; i < 15; i++) {
                     xpos = -75 * i;
                     ypos = 200;
-                    Entity e = EnemyFactory.createEnemy(new Position(xpos,ypos), 
-                                                        new Velocity(1,0));
+                    Entity e = EnemyFactory.createEnemy(new Position(xpos,ypos), new Velocity(1,0));
                     Link<Entity> el = context(world).add(Entity.class, e);
                     entities.add(el);
                 }

@@ -37,8 +37,7 @@ public class Tower implements IContentService {
         context(tower).add(EntityType.class, TOWER);
         context(tower).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
         context(tower).add(Position.class, new Position(500,100));
-        context(tower).add(Scale.class, new Scale(0.5f,0.5f));
-        context(tower).add(Radius.class, new Radius(10));
+        context(tower).add(Scale.class, new Scale(0.01f,0.01f));
         
         
         return tower;

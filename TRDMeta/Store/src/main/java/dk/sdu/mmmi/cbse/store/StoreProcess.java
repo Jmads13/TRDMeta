@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.sdu.mmmi.cbse.player;
+package dk.sdu.mmmi.cbse.store;
 
 import com.decouplink.Context;
 import static com.decouplink.Utilities.context;
@@ -17,14 +17,14 @@ import dk.sdu.mmmi.cbse.common.services.IUpdateService;
  *
  * @author Pasoa
  */
-public class PlayerProcess implements IUpdateService{
+public class StoreProcess implements IUpdateService{
 
     @Override
     public void update(Object o, Entity entity) {
-        
         Context ctx = context(entity);
         if (ctx.one(EntityType.class).equals(PLAYER)){
             Position p = context(entity).one(Position.class);
         }
     }
+    
 }

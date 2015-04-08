@@ -11,5 +11,5 @@ package dk.sdu.mmmi.cbse.common.data.types;
  * @author SoA
  */
 public enum EntityType {
-    TOWER, ENEMY, BULLET, BUTTON, PLAYER;
+    TOWER, ENEMY, BULLET, BUTTON, PLAYER, SHOP;
 }
