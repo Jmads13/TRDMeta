@@ -24,7 +24,7 @@ import org.xml.sax.SAXException;
  */
 public class XMLReader {
 
-    public static List<Element> readXML(String s) {
+    public static List<Element> readXML(String s) throws IOException {
         List<Element> elements = new ArrayList<>();
         try {
             elements.clear();
@@ -35,17 +35,17 @@ public class XMLReader {
             Document doc = dBuilder.parse(file);
             doc.getDocumentElement().normalize();
 
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            //System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
             NodeList nList = doc.getElementsByTagName("level");
 
-            System.out.println("----------------------------");
+            //System.out.println("----------------------------");
 
             for (int temp = 0; temp < nList.getLength(); temp++) {
 
                 Node nNode = nList.item(temp);
 
-                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+                //System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 

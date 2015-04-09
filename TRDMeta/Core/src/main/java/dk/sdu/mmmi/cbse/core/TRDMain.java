@@ -18,6 +18,7 @@ import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.types.LevelType;
 import static dk.sdu.mmmi.cbse.common.data.types.LevelType.ONE;
+import dk.sdu.mmmi.cbse.common.data.types.WaveType;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
 import java.awt.event.MouseAdapter;
@@ -52,8 +53,9 @@ public class TRDMain extends Game.Default{
         world = new Object();
         System.out.println("Height: " +graphics().height());
         System.out.println("Width: " +graphics().width());
-        //Init on level 1
-        context(world).add(LevelType.class, ONE);
+        //Init on level 1 (and wave 1!)
+        context(world).add(LevelType.class, LevelType.ONE);
+        context(world).add(WaveType.class, WaveType.ONE);
         
         
         //Services
