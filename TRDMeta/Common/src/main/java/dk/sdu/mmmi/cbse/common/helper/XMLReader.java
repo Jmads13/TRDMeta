@@ -23,8 +23,8 @@ import org.xml.sax.SAXException;
  * @author Pasoa
  */
 public class XMLReader {
-    
-    public static List<Element> readXML(String s){
+
+    public static List<Element> readXML(String s) {
         List<Element> elements = new ArrayList<>();
         try {
             elements.clear();
@@ -37,7 +37,7 @@ public class XMLReader {
 
             System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-            NodeList nList = doc.getElementsByTagName("staff");
+            NodeList nList = doc.getElementsByTagName("level");
 
             System.out.println("----------------------------");
 
@@ -49,8 +49,8 @@ public class XMLReader {
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
-                        Element eElement = (Element) nNode;
-                        elements.add(eElement);
+                    Element eElement = (Element) nNode;
+                    elements.add(eElement);
 //			System.out.println("Staff id : " + eElement.getAttribute("id"));
 //			System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
 //			System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
@@ -60,10 +60,10 @@ public class XMLReader {
                 }
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
-        
-    }
+            System.out.println(e);
+        }
         return elements;
-  }
+    }
 }
 
 //Example of XML

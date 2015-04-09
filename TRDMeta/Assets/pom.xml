@@ -17,6 +17,7 @@
                 <configuration>
                     <publicPackages>
                         <publicPackage>assets.images</publicPackage>
+                        <publicPackage>assets.mapinfo</publicPackage>
                         <publicPackage>ressources</publicPackage>
                     </publicPackages>
                 </configuration>
