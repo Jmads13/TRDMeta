@@ -6,9 +6,9 @@ import java.io.InputStream;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
+//import org.newdawn.slick.opengl.Texture;
+//import org.newdawn.slick.opengl.TextureLoader;
+//import org.newdawn.slick.util.ResourceLoader;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Artist {
@@ -42,36 +42,36 @@ public class Artist {
 		glEnd();
 	}
 	
-	public static void drawQuadText(Texture tex, float x, float y, float width, float height) {
-		tex.bind();
-		glTranslatef(x, y, 0); //0 for z axis, as we are running 2D
-		glBegin(GL_QUADS);
-		glTexCoord2f(0, 0);
-		glVertex2f(0, 0);
-		glTexCoord2f(1, 0);
-		glVertex2f(width, 0);
-		glTexCoord2f(1, 1);
-		glVertex2f(width, height);
-		glTexCoord2f(0 ,1);
-		glVertex2f(0, height);
-		glEnd();
-		glLoadIdentity();
-	}
-	
-	public static Texture loadTexture(String path, String fileType){
-		Texture tex = null;
-		InputStream in = ResourceLoader.getResourceAsStream(path);
-		try {
-			tex = TextureLoader.getTexture(fileType, in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return tex;
-	}
-	
-	public static Texture quickLoad(String name) {
-		Texture tex = null;
-		tex = loadTexture("resources/" + name +".png", "PNG");
-		return tex;
-	}
+//	public static void drawQuadText(Texture tex, float x, float y, float width, float height) {
+//		tex.bind();
+//		glTranslatef(x, y, 0); //0 for z axis, as we are running 2D
+//		glBegin(GL_QUADS);
+//		glTexCoord2f(0, 0);
+//		glVertex2f(0, 0);
+//		glTexCoord2f(1, 0);
+//		glVertex2f(width, 0);
+//		glTexCoord2f(1, 1);
+//		glVertex2f(width, height);
+//		glTexCoord2f(0 ,1);
+//		glVertex2f(0, height);
+//		glEnd();
+//		glLoadIdentity();
+//	}
+//	
+//	public static Texture loadTexture(String path, String fileType){
+//		Texture tex = null;
+//		InputStream in = ResourceLoader.getResourceAsStream(path);
+//		try {
+//			tex = TextureLoader.getTexture(fileType, in);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return tex;
+//	}
+//	
+//	public static Texture quickLoad(String name) {
+//		Texture tex = null;
+//		tex = loadTexture("resources/" + name +".png", "PNG");
+//		return tex;
+//	}
 }

@@ -9,7 +9,9 @@ import com.decouplink.DisposableList;
 import com.decouplink.Link;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
+import dk.sdu.mmmi.cbse.common.data.Scale;
 import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
 import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.PLACING;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
@@ -40,6 +42,8 @@ public class Player implements IContentService{
 
         context(player).add(EntityType.class, PLAYER);
         context(player).add(BehaviorType.class, PLACING);
+        context(player).add(Scale.class, new Scale(1.0f, 1.0f));
+        context(player).add(ImageAsset.class, new ImageAsset("images/RedTile.png"));
         context(player).add(Position.class, new Position(0, 0));
         return player;
     }

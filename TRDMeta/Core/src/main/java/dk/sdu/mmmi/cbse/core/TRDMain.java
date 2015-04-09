@@ -20,16 +20,17 @@ import dk.sdu.mmmi.cbse.common.data.types.LevelType;
 import static dk.sdu.mmmi.cbse.common.data.types.LevelType.ONE;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
+import java.awt.event.MouseAdapter;
 import org.openide.util.Lookup;
-import playn.core.Color;
 import playn.core.Game;
 import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
+import playn.core.Mouse;
+import playn.core.PlayN;
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 import static playn.core.PlayN.pointer;
-import playn.core.SurfaceImage;
 
 /**
  *
@@ -69,7 +70,7 @@ public class TRDMain extends Game.Default{
             }
         }
         //Add a mouselistener to the game, and let it keep a reference for the player entity
-        pointer().setListener(new InputController(player));
+        PlayN.mouse().setListener(new InputController(player));
         
         System.out.println("ContentServices located: " +Lookup.getDefault().lookupAll(IContentService.class).size());
         System.out.println("UpdateableServices located: " +Lookup.getDefault().lookupAll(IUpdateService.class).size());
@@ -97,19 +98,22 @@ public class TRDMain extends Game.Default{
             Rotation r = context(e).one(Rotation.class);
             Scale s = context(e).one(Scale.class);
             
+
+            if (view == null) {
+                view = createImageAsset(e);
+            }
             if(context(e).one(EntityType.class) == PLAYER){
-                if(context(e).one(BehaviorType.class) == PLACING){
-                    //Draw placing grid/fillRect
-                }
-            }else{
-                if (view == null) {
-                    view = createImageAsset(e);
-                }
+                view.addListener(mouseDerp(e));
+//                if(context(e).one(BehaviorType.class) == PLACING){
+//                    view = createImageAsset(e);
+//                    view.setAlpha(0.5f);
+//                }
+            }
                 view.setTranslation(p.x, p.y);
                 //view.setRotation(r.angle);
                 view.setAlpha(1.0f);
                 view.setScale(s.x, s.y);
-            }
+            
             
             if (e.isDestroyed()) {
                 rootLayer.remove(view);
@@ -133,4 +137,13 @@ public class TRDMain extends Game.Default{
         return viewLayer;
     }
     
+    private Mouse.LayerAdapter mouseDerp(Entity e){
+        Mouse.LayerAdapter ma = new Mouse.LayerAdapter() {
+            @Override
+            public void onMouseDown(Mouse.ButtonEvent event) {
+                
+            }
+        };
+        return ma;
+    }
 }

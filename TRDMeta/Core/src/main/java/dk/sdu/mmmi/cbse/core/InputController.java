@@ -8,13 +8,13 @@ package dk.sdu.mmmi.cbse.core;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.Position;
-import playn.core.Pointer;
+import playn.core.Mouse;
 
 /**
  *
  * @author Pasoa
  */
-public class InputController extends Pointer.Adapter{
+public class InputController extends Mouse.Adapter{
     Position p;
     public InputController(Entity player){
         p = context(player).one(Position.class);
@@ -22,23 +22,15 @@ public class InputController extends Pointer.Adapter{
     }
     
     @Override
-    public void onPointerStart(Pointer.Event event) {
+    public void onMouseDown(Mouse.ButtonEvent event) {
         p.x = event.x();
         p.y = event.y();
     }
 
-    @Override
-    public void onPointerEnd(Pointer.Event event) {
-
-    }
 
     @Override
-    public void onPointerDrag(Pointer.Event event) {
+    public void onMouseMove(Mouse.MotionEvent event) {
         p.x = event.x();
         p.y = event.y();
-    }
-
-    @Override
-    public void onPointerCancel(Pointer.Event event) {
     }
 }

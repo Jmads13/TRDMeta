@@ -22,4 +22,8 @@ public final class ImageAsset {
             return imageFilePath;
     }
     
+    public void setImageAsset(String s){
+        imageFilePath = s;
+    }
+    
 }
