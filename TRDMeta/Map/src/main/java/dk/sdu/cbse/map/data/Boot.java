@@ -1,8 +1,8 @@
 package dk.sdu.cbse.map.data;
-//import static dk.sdu.mmmi.cbse.map.helpers.Artist.beginSession;
-//
-//import org.lwjgl.opengl.Display;
-//import org.lwjgl.LWJGLException;
+import static dk.sdu.mmmi.cbse.map.helpers.Artist.beginSession;
+
+import org.lwjgl.opengl.Display;
+import org.lwjgl.LWJGLException;
 
 
 public class Boot {
@@ -31,14 +31,14 @@ public class Boot {
 		
 		TileGrid grid = new TileGrid(map);
 		
-//		while(!Display.isCloseRequested()){
-//			grid.draw();
-//			
-//			Display.update();
-//			Display.sync(60);
-//		}	
-//		
-//		Display.destroy();
+		while(!Display.isCloseRequested()){
+			grid.draw();
+			
+			Display.update();
+			Display.sync(60);
+		}	
+		
+		Display.destroy();
 	}
 	
 	public static void main(String[] args) {

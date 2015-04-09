@@ -1,6 +1,6 @@
 package dk.sdu.cbse.map.data;
 
-//import static dk.sdu.mmmi.cbse.map.helpers.Artist.drawQuadText;
+import static dk.sdu.mmmi.cbse.map.helpers.Artist.drawQuadText;
 
 public class TileGrid {
 
@@ -52,7 +52,7 @@ public class TileGrid {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				Tile t = map[i][j];
-//				drawQuadText(t.getTexture(), t.getX(), t.getY(), t.getWidth(), t.getHeight());
+				drawQuadText(t.getTexture(), t.getX(), t.getY(), t.getWidth(), t.getHeight());
 			}
 		}
 	}
