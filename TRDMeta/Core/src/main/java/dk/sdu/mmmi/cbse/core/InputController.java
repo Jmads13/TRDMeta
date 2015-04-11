@@ -13,6 +13,9 @@ import playn.core.Mouse;
 /**
  *
  * @author Pasoa
+ * 
+ * Adds a Position to the player Entity (Mouse coordinates)
+ * 
  */
 public class InputController extends Mouse.Adapter{
     Position p;
@@ -23,8 +26,6 @@ public class InputController extends Mouse.Adapter{
     
     @Override
     public void onMouseDown(Mouse.ButtonEvent event) {
-        p.x = event.x();
-        p.y = event.y();
     }
 
 

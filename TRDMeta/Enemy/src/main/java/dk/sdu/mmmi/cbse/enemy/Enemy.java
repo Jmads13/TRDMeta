@@ -36,7 +36,8 @@ public class Enemy implements IContentService {
         int waveEnemyCount = 0;
         NodeList waves = null;
         try {
-            List<Element> elements = XMLReader.readXML("mapinfo/EnemyWaves.xml");
+            //Assets i PlayN er træls, så vi laver den lidt alternativt:
+            List<Element> elements = XMLReader.readXML("../../../Assets/src/main/resources/assets/mapinfo/EnemyWaves.xml");
 
             //Finding waves for current level
             for (Element e : elements) {

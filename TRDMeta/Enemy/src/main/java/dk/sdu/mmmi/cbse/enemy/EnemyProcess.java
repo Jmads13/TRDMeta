@@ -11,6 +11,8 @@ import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Velocity;
+import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
+import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.SPAWNING;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.ENEMY;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
@@ -26,17 +28,18 @@ public class EnemyProcess implements IUpdateService {
         
         Context enemyCtx = context(entity);
         if (enemyCtx.one(EntityType.class).equals(ENEMY)) {
-            //All logic regarding enemy here, pathfinding and taking damage checks
-            //move();
-            Position pos = enemyCtx.one(Position.class);
-            Velocity velocity = enemyCtx.one(Velocity.class);
-            
-            pos.x += velocity.vectorX;
-            pos.y += velocity.vectorY;
+            if(enemyCtx.one(BehaviorType.class).equals(SPAWNING)){
+                //start moving
+                BehaviorType bt = enemyCtx.one(BehaviorType.class);
+                bt = BehaviorType.ASTAR;
+            }
+                Position pos = enemyCtx.one(Position.class);
+                Velocity velocity = enemyCtx.one(Velocity.class);
+
+                pos.x += velocity.vectorX;
+                pos.y += velocity.vectorY;
             
         }
-
-        
     }
     
 }

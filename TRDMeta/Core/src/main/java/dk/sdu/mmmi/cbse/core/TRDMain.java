@@ -12,16 +12,12 @@ import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Rotation;
 import dk.sdu.mmmi.cbse.common.data.Scale;
-import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
-import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.PLACING;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.types.LevelType;
-import static dk.sdu.mmmi.cbse.common.data.types.LevelType.ONE;
 import dk.sdu.mmmi.cbse.common.data.types.WaveType;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
-import java.awt.event.MouseAdapter;
 import org.openide.util.Lookup;
 import playn.core.Game;
 import playn.core.GroupLayer;
@@ -31,7 +27,6 @@ import playn.core.Mouse;
 import playn.core.PlayN;
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
-import static playn.core.PlayN.pointer;
 
 /**
  *
@@ -51,26 +46,15 @@ public class TRDMain extends Game.Default{
     public void init() {
         rootLayer = graphics().rootLayer();
         world = new Object();
-        System.out.println("Height: " +graphics().height());
-        System.out.println("Width: " +graphics().width());
-        //Init on level 1 (and wave 1!)
+        System.out.println("Height of application: " +graphics().height());
+        System.out.println("Width of application: " +graphics().width());
+        //Somewhat deprecated spawning system
         context(world).add(LevelType.class, LevelType.ONE);
         context(world).add(WaveType.class, WaveType.ONE);
         
-        
         //Services
+        initServices();
         
-        //Find all content services, and add their content(entities) to the world
-        for(IContentService service : Lookup.getDefault().lookupAll(IContentService.class)){
-            service.add(world);
-        }
-        
-        //Locate the player entity
-        for (Entity entity : context(world).all(Entity.class)) {
-            if (context(entity).one(EntityType.class) == PLAYER) {
-                this.player = entity;
-            }
-        }
         //Add a mouselistener to the game, and let it keep a reference for the player entity
         PlayN.mouse().setListener(new InputController(player));
         
@@ -79,7 +63,7 @@ public class TRDMain extends Game.Default{
         
     }
     
-    //Updates all entities via update services
+    //Updates all entities via service providers
     @Override
     public void update(int delta) {
         for(IUpdateService service : Lookup.getDefault().lookupAll(IUpdateService.class)){
@@ -100,22 +84,20 @@ public class TRDMain extends Game.Default{
             Rotation r = context(e).one(Rotation.class);
             Scale s = context(e).one(Scale.class);
             
-
             if (view == null) {
                 view = createImageAsset(e);
             }
+            
+            //Adds a mouse listener to the ImageLayer of the player (This should be used to place towers)
+            //TODO //FIXME
             if(context(e).one(EntityType.class) == PLAYER){
                 view.addListener(mouseDerp(e));
-//                if(context(e).one(BehaviorType.class) == PLACING){
-//                    view = createImageAsset(e);
-//                    view.setAlpha(0.5f);
-//                }
             }
-                view.setTranslation(p.x, p.y);
-                //view.setRotation(r.angle);
-                view.setAlpha(1.0f);
-                view.setScale(s.x, s.y);
             
+            view.setTranslation(p.x, p.y);
+            //view.setRotation(r.angle);
+            view.setAlpha(1.0f);
+            view.setScale(s.x, s.y);
             
             if (e.isDestroyed()) {
                 rootLayer.remove(view);
@@ -124,6 +106,7 @@ public class TRDMain extends Game.Default{
         }
     }
     
+    //Creates an ImageLayer for an Entity
     private ImageLayer createImageAsset(final Entity entity) {
 
         ImageAsset sprite = context(entity).one(ImageAsset.class);
@@ -139,6 +122,8 @@ public class TRDMain extends Game.Default{
         return viewLayer;
     }
     
+    //Player mouse adapter, for placing towers
+    //See Mouse.LayerAdapter for overrideable methods
     private Mouse.LayerAdapter mouseDerp(Entity e){
         Mouse.LayerAdapter ma = new Mouse.LayerAdapter() {
             @Override
@@ -147,5 +132,19 @@ public class TRDMain extends Game.Default{
             }
         };
         return ma;
+    }
+    
+    private void initServices(){
+        //Find all content services, and add their content(entities) to the world
+        for(IContentService service : Lookup.getDefault().lookupAll(IContentService.class)){
+            service.add(world);
+        }
+        
+        //Locate the player entity
+        for (Entity entity : context(world).all(Entity.class)) {
+            if (context(entity).one(EntityType.class) == PLAYER) {
+                this.player = entity;
+            }
+        }
     }
 }
