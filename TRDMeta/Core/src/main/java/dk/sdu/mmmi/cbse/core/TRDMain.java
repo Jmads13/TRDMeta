@@ -48,6 +48,7 @@ public class TRDMain extends Game.Default{
         world = new Object();
         System.out.println("Height of application: " +graphics().height());
         System.out.println("Width of application: " +graphics().width());
+        
         //Somewhat deprecated spawning system
         context(world).add(LevelType.class, LevelType.ONE);
         context(world).add(WaveType.class, WaveType.ONE);

@@ -17,5 +17,5 @@ package dk.sdu.mmmi.cbse.common.data.types;
  * SHOP = Tower that can be purchased/clicked and placed
  */
 public enum EntityType {
-    TOWER, ENEMY, BULLET, BUTTON, PLAYER, SHOP;
+    TOWER, ENEMY, BULLET, BUTTON, PLAYER, SHOP, MAPTILE;
 }

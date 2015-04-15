@@ -45,6 +45,11 @@
             <artifactId>Core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>TileMap</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
