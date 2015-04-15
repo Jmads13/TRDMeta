@@ -23,11 +23,9 @@ public class Tower implements IContentService {
     
     @Override
     public void add(Object world){
-        Entity to = createTower();
-        Link<Entity> tow = context(world).add(Entity.class, to);
-        entities.add(tow);
-        System.out.println("Tower added");
-        
+        //Entity to = createTower();
+        //Link<Entity> tow = context(world).add(Entity.class, to);
+        //entities.add(tow);
     }
     
     public static Entity createTower(){

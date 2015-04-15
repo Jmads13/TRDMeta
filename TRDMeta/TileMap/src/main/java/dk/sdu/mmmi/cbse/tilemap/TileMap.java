@@ -26,7 +26,7 @@ import dk.sdu.mmmi.cbse.common.services.IContentService;
 public class TileMap implements IContentService{
 
     DisposableList entities = new DisposableList();
-    private int length = 5, height = 5;
+    private int length = 8, height = 6;
     private int tileSize = 64;
     
     @Override
@@ -35,7 +35,6 @@ public class TileMap implements IContentService{
         for(int x = 0; x < length; x++){
             for(int y = 0; y < height; y++){
                 Entity e = new Entity();
-                System.out.println("creating map tile");
                 context(e).add(EntityType.class, MAPTILE);
                 context(e).add(ImageAsset.class, new ImageAsset(getTileImg(x,y)));
                 context(e).add(Position.class, new Position(x*tileSize+(tileSize/2), y*tileSize+(tileSize/2))); //tileSize/2 er for at flytte den fra "Origin" pladsen (Se Core.paint())
@@ -55,12 +54,14 @@ public class TileMap implements IContentService{
     }
     
     int[][] map = {
-        {1, 0, 0, 0, 0},
-        {1, 1, 1, 0, 0},
-        {2, 0, 1, 0, 0},
-        {2, 0, 1, 0, 0},
-        {0, 2, 1, 1, 1},
-        {0, 0, 2, 2, 2},
+        {1, 0, 0, 0, 2, 2},
+        {1, 1, 1, 0, 0, 2},
+        {2, 0, 1, 0, 0, 0},
+        {2, 0, 1, 0, 1, 1},
+        {2, 2, 1, 1, 1, 1},
+        {2, 2, 0, 0, 0, 1},
+        {2, 1, 1, 1, 1, 1},
+        {0, 1, 0, 0, 2, 2},
     };
     
     

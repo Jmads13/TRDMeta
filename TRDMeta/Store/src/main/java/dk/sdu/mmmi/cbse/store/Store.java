@@ -30,24 +30,24 @@ public class Store implements IContentService{
 
     @Override
     public void add(Object o) {
-        int xpos, ypos;
-        xpos = 540;
-        ypos = 50;
         
-        //TODO rewrite & perhaps rethink event handling
-        for(int i = 0; i < 10; i++){
-                Entity e = createStoreTile(new Position(xpos,ypos));
-                Link<Entity> el = context(o).add(Entity.class, e);
-                entities.add(el);
-                if(i%2!=0){
-                    ypos += 50;
-                }
-                if(i%2==0){
-                    xpos += 50;
-                }else{
-                    xpos -=50;
-                }
-        }
+        Entity naziTank = new Entity();
+        context(naziTank).add(EntityType.class, SHOP);
+        context(naziTank).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
+        context(naziTank).add(Position.class, new Position(600, 32));
+        context(naziTank).add(Scale.class, new Scale(128/945f,128/945f));
+        
+        Entity gasChamber = new Entity();
+        context(gasChamber).add(EntityType.class, SHOP);
+        context(gasChamber).add(ImageAsset.class, new ImageAsset("images/GasChamber.png"));
+        context(gasChamber).add(Position.class, new Position(570,175));
+        context(gasChamber).add(Scale.class, new Scale(64/515f,64/515f));
+        //context(gasChamber).add(Scale.class, new Scale(1.0f, 1.0f));
+        
+        Link<Entity> gc = context(o).add(Entity.class, gasChamber);
+        entities.add(gc);
+        Link<Entity> nt = context(o).add(Entity.class, naziTank);
+        entities.add(nt);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Store implements IContentService{
         context(e).add(EntityType.class, SHOP);
         context(e).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
         context(e).add(Position.class, p);
-        context(e).add(Scale.class, new Scale(10/189f,25/183f)); //945 x 366 to 50x50
+        context(e).add(Scale.class, new Scale(128/945f,128/945f)); 
         
         
         return e;
