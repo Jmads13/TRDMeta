@@ -7,7 +7,7 @@
         <version>1.8.5</version>
     </parent>
     <artifactId>Decouplink</artifactId>
-    <packaging>nbm</packaging>
+    <packaging>jar</packaging>
     <build>
         <plugins>
             <plugin>

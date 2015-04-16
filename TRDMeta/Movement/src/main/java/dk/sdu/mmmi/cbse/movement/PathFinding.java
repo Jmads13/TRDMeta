@@ -8,12 +8,15 @@ package dk.sdu.mmmi.cbse.movement;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
+import org.springframework.context.annotation.Configuration;
 
 
 /**
  *
  * @author SoA
  */
+
+@Configuration
 public class PathFinding implements IUpdateService{
 
     @Override

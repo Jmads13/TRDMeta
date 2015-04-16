@@ -1,0 +1,22 @@
+<enemies>
+    <level levelid="ONE">
+        <wave waveid="ONE">
+            <type>default</type>
+            <count>5</count>
+        </wave>
+        <wave waveid="TWO">
+            <type>default</type>
+            <count>10</count>
+        </wave>
+    </level>
+    <level levelid="TWO">
+        <wave waveid="ONE">
+            <type>default</type>
+            <count>8</count>
+        </wave>
+        <wave waveid="TWO">
+            <type>default</type>
+            <count>15</count>
+        </wave>
+    </level>
+</enemies>

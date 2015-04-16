@@ -18,7 +18,8 @@ import dk.sdu.mmmi.cbse.common.data.types.LevelType;
 import dk.sdu.mmmi.cbse.common.data.types.WaveType;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
-import org.openide.util.Lookup;
+import java.util.Collection;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import playn.core.Game;
 import playn.core.GroupLayer;
 import playn.core.Image;
@@ -37,6 +38,7 @@ public class TRDMain extends Game.Default{
     private GroupLayer rootLayer;
     private Object world;
     private Entity player;
+    private AnnotationConfigApplicationContext ctx;
     
     public TRDMain(int updateRate) {
         super(updateRate);
@@ -59,15 +61,15 @@ public class TRDMain extends Game.Default{
         //Add a mouselistener to the game, and let it keep a reference for the player entity
         PlayN.mouse().setListener(new InputController(player));
         
-        System.out.println("ContentServices located: " +Lookup.getDefault().lookupAll(IContentService.class).size());
-        System.out.println("UpdateableServices located: " +Lookup.getDefault().lookupAll(IUpdateService.class).size());
+        System.out.println("ContentServices located: " +getContentServices().size());
+        System.out.println("UpdateableServices located: " +getUpdateServices().size());
         
     }
     
     //Updates all entities via service providers
     @Override
     public void update(int delta) {
-        for(IUpdateService service : Lookup.getDefault().lookupAll(IUpdateService.class)){
+        for(IUpdateService service : getUpdateServices()){
             for (Entity e : context(world).all(Entity.class)) {
                 service.update(world, e);
             }
@@ -136,8 +138,12 @@ public class TRDMain extends Game.Default{
     }
     
     private void initServices(){
+        ctx = new AnnotationConfigApplicationContext();
+        ctx.scan("dk.sdu");
+        ctx.refresh();
+        
         //Find all content services, and add their content(entities) to the world
-        for(IContentService service : Lookup.getDefault().lookupAll(IContentService.class)){
+        for(IContentService service : getContentServices()){
             service.add(world);
         }
         
@@ -146,6 +152,14 @@ public class TRDMain extends Game.Default{
             if (context(entity).one(EntityType.class) == PLAYER) {
                 this.player = entity;
             }
-        }
+        }   
+    }
+    
+    private Collection<? extends IContentService> getContentServices() {
+        return ctx.getBeansOfType(IContentService.class).values();
+    }
+
+    private Collection<? extends IUpdateService> getUpdateServices() {
+        return ctx.getBeansOfType(IUpdateService.class).values();
     }
 }
