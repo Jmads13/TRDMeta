@@ -35,7 +35,7 @@ public class Store implements IContentService{
         context(naziTank).add(EntityType.class, SHOP);
         context(naziTank).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
         context(naziTank).add(Position.class, new Position(600, 32));
-        context(naziTank).add(Scale.class, new Scale(128/945f,128/945f));
+        context(naziTank).add(Scale.class, new Scale(1.0f,1.0f));
         
         Entity gasChamber = new Entity();
         context(gasChamber).add(EntityType.class, SHOP);
