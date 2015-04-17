@@ -67,6 +67,7 @@
         <module>Map</module>
         <module>Store</module>
         <module>TileMap</module>
+        <module>Bullet</module>
     </modules>
 
     <properties>
