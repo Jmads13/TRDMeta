@@ -49,15 +49,7 @@ public class Store implements IContentService{
             
         Link<Entity> gasIcon = context(o).add(Entity.class, gasChamberIcon(new Entity()));
         entities.add(gasIcon);
-        
-<<<<<<< HEAD
-=======
-        Link<Entity> gc = context(o).add(Entity.class, gasChamber);
-        entities.add(gc);
-        Link<Entity> nt = context(o).add(Entity.class, naziTank);
-        entities.add(nt);
 
->>>>>>> origin/master
     }
 
     @Override
