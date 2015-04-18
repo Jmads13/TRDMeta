@@ -31,23 +31,25 @@ public class Store implements IContentService{
     @Override
     public void add(Object o) {
         
-        Entity naziTank = new Entity();
-        context(naziTank).add(EntityType.class, SHOP);
-        context(naziTank).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
-        context(naziTank).add(Position.class, new Position(600, 32));
-        context(naziTank).add(Scale.class, new Scale(1.0f,1.0f));
+
+        Link<Entity> bg = context(o).add(Entity.class, backGround(new Entity()));
+        entities.add(bg);
         
-        Entity gasChamber = new Entity();
-        context(gasChamber).add(EntityType.class, SHOP);
-        context(gasChamber).add(ImageAsset.class, new ImageAsset("images/GasChamber.png"));
-        context(gasChamber).add(Position.class, new Position(570,175));
-        context(gasChamber).add(Scale.class, new Scale(64/515f,64/515f));
-        //context(gasChamber).add(Scale.class, new Scale(1.0f, 1.0f));
+        Link<Entity> topRight = context(o).add(Entity.class, topRight(new Entity()));
+        entities.add(topRight);
         
-        Link<Entity> gc = context(o).add(Entity.class, gasChamber);
-        entities.add(gc);
-        Link<Entity> nt = context(o).add(Entity.class, naziTank);
-        entities.add(nt);
+        Link<Entity> topLeft = context(o).add(Entity.class, topLeft(new Entity()));
+        entities.add(topLeft);
+        
+        Link<Entity> derpHerp = context(o).add(Entity.class, herpDerp(new Entity()));
+        entities.add(derpHerp);
+        
+        Link<Entity> tankIcon = context(o).add(Entity.class, tankIcon(new Entity()));
+        entities.add(tankIcon);
+            
+        Link<Entity> gasIcon = context(o).add(Entity.class, gasChamberIcon(new Entity()));
+        entities.add(gasIcon);
+        
     }
 
     @Override
@@ -55,15 +57,51 @@ public class Store implements IContentService{
         entities.dispose();
     }
     
-    private static Entity createStoreTile(Position p){
-        Entity e = new Entity();
+    private Entity backGround(Entity e){
         context(e).add(EntityType.class, SHOP);
-        context(e).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
-        context(e).add(Position.class, p);
-        context(e).add(Scale.class, new Scale(128/945f,128/945f)); 
-        
-        
+        context(e).add(ImageAsset.class, new ImageAsset("images/store/StoreBackground.png"));
+        context(e).add(Position.class, new Position(320, 384+48));
+        context(e).add(Scale.class, new Scale(1.0f,1.0f));
         return e;
     }
     
+    private Entity topRight(Entity e){
+        context(e).add(EntityType.class, SHOP);
+        context(e).add(ImageAsset.class, new ImageAsset("images/store/TopRight.png"));
+        context(e).add(Position.class, new Position(550+42, 384+30));
+        context(e).add(Scale.class, new Scale(1.0f,1.0f));
+        return e;
+    }
+    
+    private Entity topLeft(Entity e){
+        context(e).add(EntityType.class, SHOP);
+        context(e).add(ImageAsset.class, new ImageAsset("images/store/TopLeft.png"));
+        context(e).add(Position.class, new Position(550+42-82, 384+30));
+        context(e).add(Scale.class, new Scale(1.0f,1.0f));
+        return e;
+    }
+    
+    private Entity tankIcon(Entity e){
+        context(e).add(EntityType.class, SHOP);
+        context(e).add(ImageAsset.class, new ImageAsset("images/store/NaziTankIcon.png"));
+        context(e).add(Position.class, new Position(70+15, 384+60));
+        context(e).add(Scale.class, new Scale(1.0f,1.0f));
+        return e;
+    }
+    
+    private Entity gasChamberIcon(Entity e){
+        context(e).add(EntityType.class, SHOP);
+        context(e).add(ImageAsset.class, new ImageAsset("images/store/GasChamberIcon.png"));
+        context(e).add(Position.class, new Position(85+140, 384+60));
+        context(e).add(Scale.class, new Scale(1.0f,1.0f));
+        return e;
+    }
+
+    private Entity herpDerp(Entity e){
+        context(e).add(EntityType.class, SHOP);
+        context(e).add(ImageAsset.class, new ImageAsset("images/store/DerpHerp.png"));
+        context(e).add(Position.class, new Position(550+1, 384+30+44));
+        context(e).add(Scale.class, new Scale(1.0f,1.0f));
+        return e;
+    }
 }

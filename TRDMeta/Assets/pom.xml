@@ -18,6 +18,7 @@
                     <publicPackages>
                         <publicPackage>assets.images</publicPackage>
                         <publicPackage>assets.mapinfo</publicPackage>
+                        <publicPackage>assets.images.store</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>

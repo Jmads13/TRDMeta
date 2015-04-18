@@ -26,7 +26,7 @@ import dk.sdu.mmmi.cbse.common.services.IContentService;
 public class TileMap implements IContentService{
 
     DisposableList entities = new DisposableList();
-    private int length = 8, height = 6;
+    private int length = 10, height = 6;
     private int tileSize = 64;
     
     @Override
@@ -60,6 +60,8 @@ public class TileMap implements IContentService{
         {2, 0, 1, 0, 1, 1},
         {2, 2, 1, 1, 1, 1},
         {2, 2, 0, 0, 0, 1},
+        {2, 1, 1, 1, 1, 1},
+        {0, 1, 0, 0, 2, 2},
         {2, 1, 1, 1, 1, 1},
         {0, 1, 0, 0, 2, 2},
     };
