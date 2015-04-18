@@ -67,7 +67,11 @@
         <module>Map</module>
         <module>Store</module>
         <module>TileMap</module>
+<<<<<<< HEAD
         <module>BasicPathMovement</module>
+=======
+        <module>Bullet</module>
+>>>>>>> origin/master
     </modules>
 
     <properties>

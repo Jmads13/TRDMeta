@@ -7,8 +7,8 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Scale;
-import dk.sdu.mmmi.cbse.common.data.Speed;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
+import static dk.sdu.mmmi.cbse.common.data.types.EntityType.BULLET;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.SHOP;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 
@@ -50,6 +50,14 @@ public class Store implements IContentService{
         Link<Entity> gasIcon = context(o).add(Entity.class, gasChamberIcon(new Entity()));
         entities.add(gasIcon);
         
+<<<<<<< HEAD
+=======
+        Link<Entity> gc = context(o).add(Entity.class, gasChamber);
+        entities.add(gc);
+        Link<Entity> nt = context(o).add(Entity.class, naziTank);
+        entities.add(nt);
+
+>>>>>>> origin/master
     }
 
     @Override
