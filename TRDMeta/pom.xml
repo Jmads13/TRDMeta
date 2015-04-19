@@ -55,7 +55,6 @@
     </build>
 
     <modules>
-        <module>application</module>
         <module>Core</module>
 	<module>Assets</module>
         <module>Common</module>
@@ -69,6 +68,7 @@
         <module>TileMap</module>
         <module>BasicPathMovement</module>
         <module>Bullet</module>
+        <module>JavaLauncher</module>
     </modules>
 
     <properties>

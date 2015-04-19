@@ -33,11 +33,11 @@ public class Enemy implements IContentService {
     public void add(Object world) {
         int xpos;
         int ypos;
-        int waveEnemyCount = 0;
+        int waveEnemyCount = 1;
         NodeList waves = null;
         try {
             //Assets i PlayN er træls, så vi laver den lidt alternativt:
-            List<Element> elements = XMLReader.readXML("../../../Assets/src/main/resources/assets/mapinfo/EnemyWaves.xml");
+            List<Element> elements = XMLReader.readXML("../Assets/src/main/resources/assets/mapinfo/EnemyWaves.xml");
 
             //Finding waves for current level
             for (Element e : elements) {
@@ -54,7 +54,7 @@ public class Enemy implements IContentService {
                     waveEnemyCount = Integer.parseInt(wave.getElementsByTagName("count").item(0).getTextContent());
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             System.out.println("Could not load XML file for wave information, defaulting to "+waveEnemyCount);
         }
 
