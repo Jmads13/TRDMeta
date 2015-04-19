@@ -10,6 +10,7 @@ import dk.sdu.mmmi.cbse.common.data.Scale;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.BULLET;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
+import dk.sdu.mmmi.cbse.tower.Tower;
 
 
 
@@ -35,7 +36,7 @@ public class Bullet implements IContentService
         Entity bullet = new Entity();
         
         context(bullet).add(EntityType.class, BULLET);
-        context(bullet).add(ImageAsset.class, new ImageAsset("images/tennisbold.png"));
+        context(bullet).add(ImageAsset.class, new ImageAsset("images/Bullet.png"));
         context(bullet).add(Scale.class, new Scale(0.5f ,0.5f));
         context(bullet).add(Position.class, new Position(200, 200));
                 
