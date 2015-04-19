@@ -18,7 +18,10 @@ import dk.sdu.mmmi.cbse.common.data.types.LevelType;
 import dk.sdu.mmmi.cbse.common.data.types.WaveType;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import playn.core.Game;
 import playn.core.GroupLayer;
@@ -142,8 +145,15 @@ public class TRDMain extends Game.Default{
         ctx.scan("dk.sdu");
         ctx.refresh();
         
+        //A terrible solution to the problem of components loading in the wrong order
+        //If any method for ordering the load order of components using Spring is found
+        //then this should be removed - @Order and @DependsOn does not seem to care
+        List<IContentService> contentList = new ArrayList(getContentServices());
+        Collections.reverse(contentList);
+        
         //Find all content services, and add their content(entities) to the world
-        for(IContentService service : getContentServices()){
+        for(IContentService service : contentList){
+            System.out.println("Adding service:" + service.getClass().getName());
             service.add(world);
         }
         
