@@ -28,6 +28,7 @@ public class Path {
         pointPath.add(new Point(288,352));
         pointPath.add(new Point(416,352));
         pointPath.add(new Point(416,96));
+        pointPath.add(new Point(640,96));
     }
     
     public static Path getInstance(){
