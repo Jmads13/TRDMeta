@@ -12,6 +12,7 @@ import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Rotation;
 import dk.sdu.mmmi.cbse.common.data.Scale;
+import dk.sdu.mmmi.cbse.common.data.types.EntitySubType;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.types.LevelType;
@@ -38,7 +39,7 @@ import static playn.core.PlayN.graphics;
  */
 public class TRDMain extends Game.Default{
 
-    private GroupLayer rootLayer;
+    private GroupLayer backgroundLayer;
     private Object world;
     private Entity player;
     private AnnotationConfigApplicationContext ctx;
@@ -49,7 +50,7 @@ public class TRDMain extends Game.Default{
 
     @Override
     public void init() {
-        rootLayer = graphics().rootLayer();
+        backgroundLayer = graphics().rootLayer();
         world = new Object();
         System.out.println("Height of application: " +graphics().height());
         System.out.println("Width of application: " +graphics().width());
@@ -92,23 +93,25 @@ public class TRDMain extends Game.Default{
             
             if (view == null) {
                 view = createImageAsset(e);
+                if(context(e).one(EntitySubType.class) == EntitySubType.BUYING_NAZITANK){
+                    view.addListener(LayerListenerController.getInstance(player).setTankListener(e));
+                }
+                if(context(e).one(EntitySubType.class) == EntitySubType.BUYING_GASCHAMBER){
+                    view.addListener(LayerListenerController.getInstance(player).setChamberListener(e));
+                }
             }
             
-            //Adds a mouse listener to the ImageLayer of the player (This should be used to place towers)
-            //TODO //FIXME
-            if(context(e).one(EntityType.class) == PLAYER){
-                view.addListener(mouseDerp(e));
-            }
-            
+
             view.setTranslation(p.x, p.y);
             //view.setRotation(r.angle);
             view.setAlpha(1.0f);
             view.setScale(s.x, s.y);
             
             if (e.isDestroyed()) {
-                rootLayer.remove(view);
+                backgroundLayer.remove(view);
                 context(world).remove(e);
             }
+            //TODO viewLayer.setDepth(Float f);
         }
     }
     
@@ -123,21 +126,9 @@ public class TRDMain extends Game.Default{
         viewLayer.setOrigin(image.width() / 2f, image.height() / 2f);
 
         context(entity).add(ImageLayer.class, viewLayer);
-        rootLayer.add(viewLayer);
+        backgroundLayer.add(viewLayer);
         
         return viewLayer;
-    }
-    
-    //Player mouse adapter, for placing towers
-    //See Mouse.LayerAdapter for overrideable methods
-    private Mouse.LayerAdapter mouseDerp(Entity e){
-        Mouse.LayerAdapter ma = new Mouse.LayerAdapter() {
-            @Override
-            public void onMouseDown(Mouse.ButtonEvent event) {
-                
-            }
-        };
-        return ma;
     }
     
     private void initServices(){

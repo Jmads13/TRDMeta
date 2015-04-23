@@ -16,5 +16,5 @@ package dk.sdu.mmmi.cbse.common.data.types;
  * SPAWNING = Monster has been read from XML and is waiting to get spawned
  */
 public enum BehaviorType {
-    ASTAR, SHOOT, HIT, PLACING, SPAWNING;
+    ASTAR, SHOOT, HIT, PLACING, SPAWNING, INIT;
 }
