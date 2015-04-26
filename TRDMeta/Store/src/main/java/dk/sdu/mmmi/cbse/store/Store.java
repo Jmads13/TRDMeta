@@ -7,6 +7,7 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Scale;
+import dk.sdu.mmmi.cbse.common.data.types.EntitySubType;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.BULLET;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.SHOP;
@@ -84,6 +85,7 @@ public class Store implements IContentService{
     private Entity tankIcon(Entity e){
         context(e).add(EntityType.class, SHOP);
         context(e).add(ImageAsset.class, new ImageAsset("images/store/NaziTankIcon.png"));
+        context(e).add(EntitySubType.class, EntitySubType.BUYING_NAZITANK);
         context(e).add(Position.class, new Position(70+15, 384+60));
         context(e).add(Scale.class, new Scale(1.0f,1.0f));
         return e;

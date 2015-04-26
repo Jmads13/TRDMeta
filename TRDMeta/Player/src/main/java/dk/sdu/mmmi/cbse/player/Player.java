@@ -41,7 +41,6 @@ public class Player implements IContentService{
         Entity player = new Entity();
 
         context(player).add(EntityType.class, PLAYER);
-        context(player).add(BehaviorType.class, PLACING);
         context(player).add(Scale.class, new Scale(0.0f, 0.0f));
         context(player).add(ImageAsset.class, new ImageAsset("images/RedTile.png"));
         context(player).add(Position.class, new Position(0, 0));

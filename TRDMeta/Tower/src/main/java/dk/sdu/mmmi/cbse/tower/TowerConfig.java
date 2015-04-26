@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Scope;
 public class TowerConfig {
     
     @Bean
-    @Scope(value = "prototype")
+    @Scope(value = "singleton")
     public IUpdateService createTowerUpdateService() {
         return new TowerProcess();
     }
