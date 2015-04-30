@@ -106,7 +106,9 @@ public class TRDMain extends Game.Default{
             
 
             view.setTranslation(p.x, p.y);
-            //view.setRotation(r.angle);
+            if(r != null){
+                view.setRotation(r.angle);
+            }
             view.setAlpha(1.0f);
             view.setScale(s.x, s.y);
             
