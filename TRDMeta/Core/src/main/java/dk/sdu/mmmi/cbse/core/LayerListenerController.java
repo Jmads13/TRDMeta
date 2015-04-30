@@ -52,4 +52,16 @@ public class LayerListenerController extends Mouse.LayerAdapter{
         };
         return ma;
     }
+    
+    public Mouse.LayerAdapter setTowerListener(final Entity e){
+        Mouse.LayerAdapter ma = new Mouse.LayerAdapter() {
+            @Override
+            public void onMouseDown(Mouse.ButtonEvent event) {
+                context(e).remove(BehaviorType.PLACING);
+                context(e).add(BehaviorType.class, BehaviorType.SPAWNING);
+            }
+        };
+        return ma;
+    }
+    
 }

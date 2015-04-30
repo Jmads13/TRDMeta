@@ -33,10 +33,10 @@ public class PlayerProcess implements IUpdateService{
             Position p = context(entity).one(Position.class);
             if(context(entity).one(EntitySubType.class) == EntitySubType.BUYING_NAZITANK){
                 if(context(entity).one(BehaviorType.class) == BehaviorType.INIT){
+                    context(entity).remove(BehaviorType.INIT);
+                    
                     Entity tower = new Entity();
-        
                     context(tower).add(EntityType.class, TOWER);
-                    context(entity).remove(BehaviorType.class);
                     context(tower).add(BehaviorType.class, PLACING);
                     context(tower).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
                     context(tower).add(Position.class, p);

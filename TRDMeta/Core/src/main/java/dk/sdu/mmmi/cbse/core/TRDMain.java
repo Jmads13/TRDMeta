@@ -99,6 +99,9 @@ public class TRDMain extends Game.Default{
                 if(context(e).one(EntitySubType.class) == EntitySubType.BUYING_GASCHAMBER){
                     view.addListener(LayerListenerController.getInstance(player).setChamberListener(e));
                 }
+                if(context(e).one(EntityType.class)== EntityType.TOWER){
+                    view.addListener(LayerListenerController.getInstance(player).setTowerListener(e));
+                }
             }
             
 
