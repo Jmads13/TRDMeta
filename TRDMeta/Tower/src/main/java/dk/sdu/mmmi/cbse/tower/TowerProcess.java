@@ -9,6 +9,7 @@ import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
+import dk.sdu.mmmi.cbse.common.data.Range;
 import dk.sdu.mmmi.cbse.common.data.Scale;
 import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
 import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.PLACING;
@@ -31,9 +32,10 @@ class TowerProcess implements IUpdateService {
         }
         if(context(entity).one(EntityType.class).equals(TOWER)){
             if(context(entity).one(BehaviorType.class).equals(BehaviorType.SPAWNING)){
-                entity.setDestroyed(true);
+                entity.setDestroyed(true); //Destroy's drag and drop entity
                     Entity tower = new Entity();
                     context(tower).add(EntityType.class, TOWER);
+                    context(tower).add(Range.class, new Range(200));
                     context(tower).add(BehaviorType.class, PLACING);
                     context(tower).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
                     context(tower).add(Position.class, new Position(playerPos.x, playerPos.y));

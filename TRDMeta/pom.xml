@@ -69,6 +69,7 @@
         <module>BasicPathMovement</module>
         <module>Bullet</module>
         <module>JavaLauncher</module>
+        <module>PewPew</module>
     </modules>
 
     <properties>
