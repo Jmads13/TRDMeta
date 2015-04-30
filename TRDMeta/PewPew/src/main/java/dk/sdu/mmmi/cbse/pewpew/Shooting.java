@@ -8,14 +8,20 @@ package dk.sdu.mmmi.cbse.pewpew;
 import com.decouplink.DisposableList;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Radius;
 import dk.sdu.mmmi.cbse.common.data.Range;
 import dk.sdu.mmmi.cbse.common.data.Rotation;
+import dk.sdu.mmmi.cbse.common.data.Scale;
+import dk.sdu.mmmi.cbse.common.data.Velocity;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
+import static dk.sdu.mmmi.cbse.common.data.types.EntityType.BULLET;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,7 +37,16 @@ class Shooting implements IUpdateService {
 
     @Override
     public void update(Object o, Entity e) {
+        if(context(e).one(EntityType.class).equals(EntityType.BULLET)){
+            Position pos = context(e).one(Position.class);
+            Velocity velocity = context(e).one(Velocity.class);
+
+            pos.x += velocity.vectorX;
+            pos.y += velocity.vectorY;
+        }
+        
         List<Entity> entities = new ArrayList<Entity>(context(o).all(Entity.class));
+        Collections.reverse(entities);
         disposables.dispose();  
         
         for(Entity target : entities){
@@ -40,6 +55,7 @@ class Shooting implements IUpdateService {
                     if(testRange(e, target)){
                         Rotation rotation = context(e).one(Rotation.class);
                         rotation.angle = calcAngle(e, target);
+                        shoot(o, e);
                     }
                 }
             }
@@ -69,8 +85,21 @@ class Shooting implements IUpdateService {
         
         float angle = (float) (Math.atan2(p2.y-p1.y,p2.x-p1.x));
         
-        System.out.println(angle);
-        
         return angle;
+    }
+
+    private void shoot(Object o, Entity e) {
+        Position p = context(e).one(Position.class);
+        Rotation r = context(e).one(Rotation.class);
+        
+        
+        Entity bullet = new Entity();
+        context(bullet).add(EntityType.class, BULLET);
+        context(bullet).add(ImageAsset.class, new ImageAsset("images/Bullet1.png"));
+        context(bullet).add(Position.class, new Position(p.x, p.y));
+        context(bullet).add(Rotation.class, new Rotation(r.angle));
+        context(bullet).add(Velocity.class, new Velocity((float) (Math.cos(r.angle) * 10), (float) (Math.sin(r.angle) * 10)));
+        context(bullet).add(Scale.class, new Scale(1f,1f));
+        context(o).add(Entity.class, bullet);
     }
 }
