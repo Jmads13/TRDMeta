@@ -19,7 +19,6 @@ import dk.sdu.mmmi.cbse.common.data.types.LevelType;
 import dk.sdu.mmmi.cbse.common.data.types.WaveType;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
-import pzz.updater.dynupdater.UpdaterImpl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -54,10 +53,10 @@ public class TRDMain extends Game.Default{
         ctx.scan("dk.sdu");
         ctx.refresh();
         
-        UpdaterImpl updater = (UpdaterImpl)ctx.getBean("DynUpdater");
-        updater.setApplicationContext(ctx);
-        updater.setWorld(world);
-        System.out.println("aaaa");
+//        UpdaterImpl updater = (UpdaterImpl)ctx.getBean("DynUpdater");
+//        updater.setApplicationContext(ctx);
+//        updater.setWorld(world);
+//        System.out.println("aaaa");
     }
 
     @Override
@@ -157,7 +156,7 @@ public class TRDMain extends Game.Default{
         //If any method for ordering the load order of components using Spring is found
         //then this should be removed - @Order and @DependsOn does not seem to care
         List<IContentService> contentList = new ArrayList(getContentServices());
-        Collections.reverse(contentList);
+        //Collections.reverse(contentList);
         
         //Find all content services, and add their content(entities) to the world
         for(IContentService service : contentList){

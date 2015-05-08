@@ -11,4 +11,8 @@ package dk.sdu.mmmi.cbse.common.data;
  */
 public class GameTime {
     public int delta;
+    
+    public GameTime(int d){
+        this.delta = d;
+    }
 }

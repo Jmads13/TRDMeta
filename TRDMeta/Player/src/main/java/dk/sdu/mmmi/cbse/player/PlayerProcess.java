@@ -8,6 +8,7 @@ package dk.sdu.mmmi.cbse.player;
 import com.decouplink.Context;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.GameTime;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Rotation;
@@ -39,6 +40,7 @@ public class PlayerProcess implements IUpdateService{
                     Entity tower = new Entity();
                     context(tower).add(EntityType.class, TOWER);
                     context(tower).add(BehaviorType.class, PLACING);
+                    context(tower).add(GameTime.class, new GameTime(10));
                     context(tower).add(Rotation.class, new Rotation());
                     context(tower).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
                     context(tower).add(Position.class, p);

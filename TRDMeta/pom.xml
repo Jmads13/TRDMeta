@@ -71,6 +71,7 @@
         <module>JavaLauncher</module>
         <module>PewPew</module>
         <module>DynUpdater</module>
+        <module>Collision</module>
     </modules>
 
     <properties>

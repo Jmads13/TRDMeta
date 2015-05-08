@@ -7,6 +7,7 @@ package dk.sdu.mmmi.cbse.tower;
 
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.GameTime;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Range;
@@ -39,6 +40,7 @@ class TowerProcess implements IUpdateService {
                     context(tower).add(Range.class, new Range(200));
                     context(tower).add(BehaviorType.class, PLACING);
                     context(tower).add(Rotation.class, new Rotation());
+                    context(tower).add(GameTime.class, new GameTime(10)); 
                     context(tower).add(ImageAsset.class, new ImageAsset("images/Nazi_Tank.png"));
                     context(tower).add(Position.class, new Position(playerPos.x, playerPos.y));
                     context(tower).add(Scale.class, new Scale(1f,1f));

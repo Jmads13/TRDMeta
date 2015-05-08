@@ -8,6 +8,7 @@ package dk.sdu.mmmi.cbse.pewpew;
 import com.decouplink.DisposableList;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.GameTime;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Radius;
@@ -39,14 +40,18 @@ class Shooting implements IUpdateService {
     public void update(Object o, Entity e) {
         if(context(e).one(EntityType.class).equals(EntityType.BULLET)){
             Position pos = context(e).one(Position.class);
+            if(checkBounds(pos)){
             Velocity velocity = context(e).one(Velocity.class);
 
             pos.x += velocity.vectorX;
             pos.y += velocity.vectorY;
+            }else{
+                e.setDestroyed(true);
+            }
         }
         
         List<Entity> entities = new ArrayList<Entity>(context(o).all(Entity.class));
-        Collections.reverse(entities);
+        //Collections.reverse(entities);
         disposables.dispose();  
         
         for(Entity target : entities){
@@ -55,7 +60,12 @@ class Shooting implements IUpdateService {
                     if(testRange(e, target)){
                         Rotation rotation = context(e).one(Rotation.class);
                         rotation.angle = calcAngle(e, target);
-                        shoot(o, e);
+                        if(context(e).one(GameTime.class).delta < 0){
+                            shoot(o, e);
+                            context(e).one(GameTime.class).delta = 10;
+                        }
+                        context(e).one(GameTime.class).delta--;
+                        break;
                     }
                 }
             }
@@ -101,5 +111,12 @@ class Shooting implements IUpdateService {
         context(bullet).add(Velocity.class, new Velocity((float) (Math.cos(r.angle) * 10), (float) (Math.sin(r.angle) * 10)));
         context(bullet).add(Scale.class, new Scale(1f,1f));
         context(o).add(Entity.class, bullet);
+    }
+
+    private boolean checkBounds(Position p) {
+        if(p.x < 0 || p.x > 640 || p.y < 0 || p.y > 480-96){
+            return false;
+        }
+        return true;
     }
 }
