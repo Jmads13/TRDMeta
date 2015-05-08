@@ -6,6 +6,9 @@
 package dk.sdu.mmmi.cbse.javalauncher;
 
 import dk.sdu.mmmi.cbse.core.TRDMain;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import playn.core.PlayN;
 import playn.java.JavaPlatform;
 /**
@@ -14,9 +17,18 @@ import playn.java.JavaPlatform;
  */
 public class TRDGameJava {
     
+    private static ScheduledExecutorService exe = Executors.newScheduledThreadPool(1);
+    
     public static void main(String[] args) {
         JavaPlatform.Config config = new JavaPlatform.Config();
         JavaPlatform.register(config);
-        PlayN.run(new TRDMain(33));
+        
+        exe.schedule(new Runnable() {
+            @Override
+            public void run() {
+                PlayN.run(new TRDMain(33));
+            }
+        }, 3, TimeUnit.SECONDS);
+        
     }
 }

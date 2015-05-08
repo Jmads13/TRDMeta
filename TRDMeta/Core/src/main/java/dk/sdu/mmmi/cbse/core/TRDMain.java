@@ -19,6 +19,7 @@ import dk.sdu.mmmi.cbse.common.data.types.LevelType;
 import dk.sdu.mmmi.cbse.common.data.types.WaveType;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
+import pzz.updater.dynupdater.UpdaterImpl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,6 +34,7 @@ import playn.core.PlayN;
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 
+
 /**
  *
  * @author SoA
@@ -45,7 +47,17 @@ public class TRDMain extends Game.Default{
     private AnnotationConfigApplicationContext ctx;
     
     public TRDMain(int updateRate) {
-        super(updateRate);
+        super(updateRate);   
+        
+        ctx = new AnnotationConfigApplicationContext();
+        ctx.scan("pzz.updater");
+        ctx.scan("dk.sdu");
+        ctx.refresh();
+        
+        UpdaterImpl updater = (UpdaterImpl)ctx.getBean("DynUpdater");
+        updater.setApplicationContext(ctx);
+        updater.setWorld(world);
+        System.out.println("aaaa");
     }
 
     @Override
@@ -60,6 +72,7 @@ public class TRDMain extends Game.Default{
         context(world).add(WaveType.class, WaveType.ONE);
         
         //Services
+        System.out.println("Init Services??");
         initServices();
         
         //Add a mouselistener to the game, and let it keep a reference for the player entity
@@ -137,9 +150,8 @@ public class TRDMain extends Game.Default{
     }
     
     private void initServices(){
-        ctx = new AnnotationConfigApplicationContext();
-        ctx.scan("dk.sdu");
-        ctx.refresh();
+        
+        System.out.println("Adding services..");
         
         //A terrible solution to the problem of components loading in the wrong order
         //If any method for ordering the load order of components using Spring is found

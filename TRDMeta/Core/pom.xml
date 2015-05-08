@@ -47,11 +47,11 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Enemy</artifactId>
             <version>${project.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Assets</artifactId>
@@ -90,6 +90,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>PewPew</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pzz.updater</groupId>
+            <artifactId>DynUpdater</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
