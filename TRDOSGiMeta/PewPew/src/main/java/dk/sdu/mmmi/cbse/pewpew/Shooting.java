@@ -104,7 +104,7 @@ class Shooting implements IUpdateService {
         
         Entity bullet = new Entity();
         context(bullet).add(EntityType.class, BULLET);
-        context(bullet).add(ImageAsset.class, new ImageAsset("images/Bullet1.png"));
+        context(bullet).add(ImageAsset.class, new ImageAsset(url));
         context(bullet).add(Position.class, new Position(p.x, p.y));
         context(bullet).add(Rotation.class, new Rotation(r.angle));
         context(bullet).add(Velocity.class, new Velocity((float) (Math.cos(r.angle) * 10), (float) (Math.sin(r.angle) * 10)));

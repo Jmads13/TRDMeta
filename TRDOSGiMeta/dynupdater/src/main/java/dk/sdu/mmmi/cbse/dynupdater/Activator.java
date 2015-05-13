@@ -51,7 +51,6 @@ public class Activator implements BundleActivator {
                         System.out.println(ex);
                     }
                 }
-                System.out.println("beep");
             }
             System.out.println("Checking for removed services");
             for(File jar : jarList.keySet()) {

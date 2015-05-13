@@ -11,6 +11,7 @@ import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Velocity;
+import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import dk.sdu.mmmi.cbse.common.data.types.LevelType;
 import dk.sdu.mmmi.cbse.common.data.types.WaveType;
 import dk.sdu.mmmi.cbse.common.helper.XMLReader;
@@ -28,9 +29,11 @@ import org.w3c.dom.NodeList;
 public class Enemy implements IContentService {
 
     DisposableList entities = new DisposableList();
+    Object o;
 
     @Override
     public void add(Object world) {
+        this.o = world;
         int xpos;
         int ypos;
         int waveEnemyCount = 1;
@@ -71,7 +74,11 @@ public class Enemy implements IContentService {
 
     @Override
     public void remove() {
-        entities.dispose();
+        for(Entity e : context(o).all(Entity.class)){
+            if(context(e).one(EntityType.class) == EntityType.ENEMY){
+                e.setDestroyed(true);
+            }
+        }
     }
 
 }
