@@ -87,11 +87,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>BasicPathMovement</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>Collision</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -104,6 +99,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>dynupdater</artifactId>
             <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Enemy</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

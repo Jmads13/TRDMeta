@@ -116,6 +116,7 @@
     <module>BasicPathMovement</module>
     <module>Collision</module>
     <module>Enemy</module>
+    <module>AStarMovement</module>
   </modules>
 
     <properties>

@@ -121,7 +121,9 @@ public class TRDMain extends Game.Default {
                 backgroundLayer.remove(view);
                 context(world).remove(e);
             }
-            //TODO viewLayer.setDepth(Float f);
+            if(context(e).one(EntityType.class)==EntityType.ENEMY){
+                view.setDepth(100f); //paint enemies on top of everything
+            }
         }
     }
 
