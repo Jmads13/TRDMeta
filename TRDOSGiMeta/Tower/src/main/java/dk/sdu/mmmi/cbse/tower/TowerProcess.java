@@ -43,7 +43,7 @@ class TowerProcess implements IUpdateService {
                 Entity tower = new Entity();
                 context(tower).add(EntityType.class, TOWER);
                 context(tower).add(Range.class, new Range(200));
-                context(tower).add(BehaviorType.class, PLACING);
+                context(tower).add(BehaviorType.class, BehaviorType.SHOOT);
                 context(tower).add(Rotation.class, new Rotation());
                 context(tower).add(GameTime.class, new GameTime(10));
                 context(tower).add(ImageAsset.class, new ImageAsset(url));

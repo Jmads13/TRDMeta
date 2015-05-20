@@ -58,7 +58,8 @@ public class LayerListenerController extends Mouse.LayerAdapter{
             @Override
             public void onMouseDown(Mouse.ButtonEvent event) {
                 context(e).remove(BehaviorType.PLACING);
-                context(e).add(BehaviorType.class, BehaviorType.SPAWNING);
+                if(context(e).one(BehaviorType.class) != BehaviorType.SHOOT)
+                    context(e).add(BehaviorType.class, BehaviorType.SPAWNING);
             }
         };
         return ma;

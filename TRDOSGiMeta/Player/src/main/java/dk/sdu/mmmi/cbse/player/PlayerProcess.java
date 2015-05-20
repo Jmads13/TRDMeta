@@ -36,6 +36,7 @@ public class PlayerProcess implements IUpdateService{
             Position p = context(entity).one(Position.class);
             if(context(entity).one(EntitySubType.class) == EntitySubType.BUYING_NAZITANK){
                 if(context(entity).one(BehaviorType.class) == BehaviorType.INIT){
+                    context(entity).remove(EntitySubType.BUYING_NAZITANK);
                     context(entity).remove(BehaviorType.INIT);
                     
                     ClassLoader cl = Lookup.getDefault().lookup(ClassLoader.class);

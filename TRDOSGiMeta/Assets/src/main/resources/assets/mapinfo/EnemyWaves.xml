@@ -2,7 +2,7 @@
     <level levelid="ONE">
         <wave waveid="ONE">
             <type>default</type>
-            <count>1</count>
+            <count>5</count>
         </wave>
         <wave waveid="TWO">
             <type>default</type>

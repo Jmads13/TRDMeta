@@ -14,6 +14,7 @@ import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Rotation;
 import dk.sdu.mmmi.cbse.common.data.Scale;
 import dk.sdu.mmmi.cbse.common.data.Velocity;
+import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.BULLET;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
@@ -52,7 +53,8 @@ class Shooting implements IUpdateService {
         disposables.dispose();  
         
         for(Entity target : entities){
-            if(context(target).one(EntityType.class).equals(EntityType.ENEMY)){
+            if(context(target).one(EntityType.class).equals(EntityType.ENEMY)
+                    && context(target).one(BehaviorType.class) == BehaviorType.ASTAR){
                 if(context(e).one(EntityType.class).equals(EntityType.TOWER)){
                     if(testRange(e, target)){
                         Rotation rotation = context(e).one(Rotation.class);

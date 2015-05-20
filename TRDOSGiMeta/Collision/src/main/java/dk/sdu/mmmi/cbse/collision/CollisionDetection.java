@@ -8,6 +8,7 @@ package dk.sdu.mmmi.cbse.collision;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.Position;
+import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
 import java.util.ArrayList;
@@ -28,7 +29,8 @@ class CollisionDetection implements IUpdateService{
         List<Entity> entities = new ArrayList<Entity>(context(o).all(Entity.class));
         //Collections.reverse(entities);
         for(Entity target : entities){
-            if(context(target).one(EntityType.class).equals(EntityType.ENEMY)){
+            if(context(target).one(EntityType.class).equals(EntityType.ENEMY)
+                    && context(target).one(BehaviorType.class) == BehaviorType.ASTAR){
                  if(context(e).one(EntityType.class).equals(EntityType.BULLET)){
                      if(checkCollision(e, target)){
                          target.setDestroyed(true); //Taking dmg instead of killing it

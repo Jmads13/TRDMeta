@@ -34,8 +34,6 @@ public class Enemy implements IContentService {
     @Override
     public void add(Object world) {
         this.o = world;
-        int xpos;
-        int ypos;
         int waveEnemyCount = 1;
         NodeList waves = null;
         try {
@@ -63,9 +61,7 @@ public class Enemy implements IContentService {
 
         //Creating enemies based on wave info given
         for (int i = 0; i < waveEnemyCount; i++) {
-            xpos = 0 * i;
-            ypos = 200;
-            Entity e = EnemyFactory.createEnemy(new Position(xpos, ypos), new Velocity(1, 0));
+            Entity e = EnemyFactory.createEnemy(i, new Velocity(1, 0));
             Link<Entity> el = context(world).add(Entity.class, e);
             entities.add(el);
         }

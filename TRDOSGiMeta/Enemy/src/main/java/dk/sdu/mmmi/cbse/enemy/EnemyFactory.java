@@ -8,6 +8,7 @@ package dk.sdu.mmmi.cbse.enemy;
 
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.GameTime;
 import dk.sdu.mmmi.cbse.common.data.Health;
 import dk.sdu.mmmi.cbse.common.data.Hitbox;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
@@ -30,7 +31,7 @@ import org.openide.util.Lookup;
 public class EnemyFactory{ 
     
     
-    public static Entity createEnemy(Position pos, Velocity direction){
+    public static Entity createEnemy(int i, Velocity direction){
         Entity enemy = new Entity();
         
         ClassLoader cl = Lookup.getDefault().lookup(ClassLoader.class);
@@ -40,12 +41,13 @@ public class EnemyFactory{
         //Add stuff to enemy (Via common data)
         //BehaviorType set to Spawning
         context(enemy).add(EntityType.class, ENEMY);
-        context(enemy).add(BehaviorType.class, ASTAR);
+        context(enemy).add(BehaviorType.class, BehaviorType.SPAWNING);
+        context(enemy).add(GameTime.class, new GameTime(i*75));
         context(enemy).add(ImageAsset.class, new ImageAsset(url));
         context(enemy).add(Health.class, new Health(100));
         context(enemy).add(Hitbox.class, new Hitbox()); //Not yet implemented
         context(enemy).add(Speed.class, new Speed(1));
-        context(enemy).add(Position.class, pos);
+        context(enemy).add(Position.class, new Position(0,200));
         context(enemy).add(Velocity.class, direction);
         context(enemy).add(Scale.class, new Scale(0.5f,0.5f));
         context(enemy).add(Radius.class, new Radius(10));

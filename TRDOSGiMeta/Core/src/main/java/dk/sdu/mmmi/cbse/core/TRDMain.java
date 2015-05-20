@@ -6,6 +6,7 @@
 package dk.sdu.mmmi.cbse.core;
 
 import static com.decouplink.Utilities.context;
+import dk.sdu.mmmi.cbse.common.data.Depth;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
@@ -121,8 +122,9 @@ public class TRDMain extends Game.Default {
                 backgroundLayer.remove(view);
                 context(world).remove(e);
             }
-            if(context(e).one(EntityType.class)==EntityType.ENEMY){
-                view.setDepth(100f); //paint enemies on top of everything
+            if(context(e).one(Depth.class) != null){
+                view.setDepth(context(e).one(Depth.class).depth);
+                //TODO hvis der opstår depth problemer
             }
         }
     }
