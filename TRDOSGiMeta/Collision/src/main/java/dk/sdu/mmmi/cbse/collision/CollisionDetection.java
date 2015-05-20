@@ -51,7 +51,6 @@ class CollisionDetection implements IUpdateService{
 
         double dist = Math.sqrt((dx * dx) + (dy * dy));
         boolean withinRange = dist <= 30; //Monster radius
-        System.out.println(dist);
 
         return withinRange;
     }
