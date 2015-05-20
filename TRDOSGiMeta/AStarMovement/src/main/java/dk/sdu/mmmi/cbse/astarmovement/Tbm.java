@@ -22,16 +22,12 @@ public class Tbm {
     }
     
     private static final int[][] MAP = {
-        {1, 1, 1, 1, 2, 2},
-        {1, 1, 1, 0, 0, 2},
-        {2, 0, 1, 0, 0, 0},
-        {2, 0, 1, 0, 1, 1},
-        {2, 2, 1, 1, 1, 1},
-        {2, 2, 0, 0, 0, 1},
-        {2, 1, 1, 1, 1, 1},
-        {0, 1, 0, 0, 2, 2},
-        {2, 1, 0, 2, 2, 2},
-        {0, 1, 0, 0, 2, 2},
+        {1,1,0,0,0,0,0,0,0,0},
+        {1,1,0,0,2,2,1,1,1,1},
+        {1,1,1,1,1,0,1,0,2,0},
+        {1,0,0,0,1,2,1,0,2,2},
+        {2,2,0,1,1,2,1,0,0,2},
+        {2,2,0,1,1,1,1,0,0,2},
     };
 
     public int getHeightInTiles() {
@@ -42,7 +38,7 @@ public class Tbm {
         return md.getWidth();
     }
 
-    public boolean blocked(AStarNode asn) {
-        return MAP[asn.x][asn.y] != 1;
+    public static boolean blocked(AStarNode asn) {
+        return MAP[asn.y][asn.x] != 1;
     }
 }

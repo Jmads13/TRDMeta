@@ -5,9 +5,20 @@
  */
 package dk.sdu.mmmi.cbse.astarmovement;
 
+import com.decouplink.Context;
+import static com.decouplink.Utilities.context;
+import dk.sdu.mmmi.cbse.common.data.ChaseCounter;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.Position;
+import dk.sdu.mmmi.cbse.common.data.Tile;
+import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
+import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.ASTAR;
+import dk.sdu.mmmi.cbse.common.data.types.EntityType;
+import static dk.sdu.mmmi.cbse.common.data.types.EntityType.ENEMY;
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -16,22 +27,59 @@ import java.util.ArrayList;
  */
 public class AStar implements IUpdateService{
     private static AStar instance;
-    private boolean runThrough;
-    
+    private ArrayList<AStarNode> path;
+   
     private AStar(){
-        runThrough = true;
+        path = aStaring(new AStarNode(0, 3), new AStarNode(9, 1));
     }
     
     
     
     @Override
     public void update(Object o, Entity entity) {
-        if(runThrough){
-            System.out.println("**************runThrough**************");
-            aStaring(o, new AStarNode(4, 1), new AStarNode(2, 10));
-            System.out.println("**************ranThrough**************");
-            runThrough = false;
+            if(path != null){
+            Context ctx = context(entity);
+            if (ctx.one(EntityType.class).equals(ENEMY)) {
+                if(ctx.one(BehaviorType.class).equals(ASTAR)){
+                    if(ctx.one(Point.class) != null){
+                        //Movement
+                        if(ctx.one(Position.class).x < ctx.one(Point.class).x){
+                                ctx.one(Position.class).x++;
+                        }else if(ctx.one(Position.class).y < ctx.one(Point.class).y){
+                                ctx.one(Position.class).y++;
+                        }else if(ctx.one(Position.class).x > ctx.one(Point.class).x){
+                                ctx.one(Position.class).x--;
+                        }else if(ctx.one(Position.class).y > ctx.one(Point.class).y){
+                                ctx.one(Position.class).y--;
+                        }
+                        //Chase pointing
+                        if(ctx.one(Position.class).x == ctx.one(Point.class).x
+                                && ctx.one(Position.class).y == ctx.one(Point.class).y){
+                            if(ctx.one(ChaseCounter.class) != null){
+                                System.out.println(ctx.one(ChaseCounter.class).i);
+                                ctx.one(ChaseCounter.class).i++;
+                                if(path.size()-1 > (ctx.one(ChaseCounter.class).i)){
+                                    ctx.one(Point.class).x = (path.get(ctx.one(ChaseCounter.class).i).x*64)+32;
+                                    ctx.one(Point.class).y = (path.get(ctx.one(ChaseCounter.class).i).y*64)+32;
+                                    System.out.println(ctx.one(Point.class).x +" : " + ctx.one(Point.class).y);
+                                }else{
+                                    entity.setDestroyed(true);
+                                }//End of path
+                            }else{
+                                ctx.add(ChaseCounter.class, new ChaseCounter(0));
+                            }
+                    }
+                    }else{
+                        int x = (path.get(0).x*64)+32;
+                        int y = (path.get(0).y*64)+32;
+                        ctx.add(Point.class, new Point(x, y));
+                    }
+                }//If ASTAR
+            }//If ENEMY 
+        }else{
+            path = aStaring(new AStarNode(0, 3), new AStarNode(9, 1));
         }
+            //aStaring(o, new AStarNode(0, 3), new AStarNode(9, 1));
     }
     
     //Singleton
@@ -43,7 +91,7 @@ public class AStar implements IUpdateService{
     }
     
 
-    private ArrayList<AStarNode> aStaring(Object o, AStarNode start, AStarNode goal) {
+    private ArrayList<AStarNode> aStaring(AStarNode start, AStarNode goal) {
         ArrayList<AStarNode> closed = new ArrayList();
         ArrayList<AStarNode> open = new ArrayList();
         
@@ -65,12 +113,13 @@ public class AStar implements IUpdateService{
             open.remove(q);
             closed.add(q);
             for(AStarNode succesor : q.generateSuccesors()){
+                System.out.println("generated from :" + q.x + ", "+ q.y);
                 System.out.println("evaluating succesor: " + succesor.x + ", "+succesor.y);
                 if(closed.contains(succesor)){
-                    System.out.println("Closed contained succesor");
-                    //TODO Check if walkable 
+                    System.out.println("Closed contained " + succesor.x + ", "+succesor.y);
                 }else{
                     if(!open.contains(succesor)){
+                        System.out.println("Open didn't contain " + succesor.x + ", "+succesor.y);
                         succesor.g = q.g+1;
                         succesor.h = estimateDistance(succesor, goal);
                         succesor.f = succesor.g + succesor.h;
@@ -83,10 +132,11 @@ public class AStar implements IUpdateService{
                             closed.add(succesor);
                         }
                     }
+                    System.out.println("");
                     if(succesor.x == goal.x && succesor.y == goal.y){ //path found
                         System.out.println("hurray A* have generated a path from: ("+ start.x+","+start.y + ") to ("+goal.x+","+goal.y+")");
                         System.out.println("You derserve a beer!");
-                        return reconstructPath(succesor);
+                        return reconstructPath(start, succesor);
                     }
                 }
             }
@@ -98,12 +148,18 @@ public class AStar implements IUpdateService{
         return Math.abs(node1.x - node2.x) + Math.abs(node1.y - node2.y);
     }
     
-    private ArrayList<AStarNode> reconstructPath(AStarNode node) {
+    private ArrayList<AStarNode> reconstructPath(AStarNode startNode, AStarNode node) {
         ArrayList<AStarNode> path = new ArrayList<>();
         while(!(node.parent == null)) {
             path.add(node);
             node = node.parent;
         }
+        Collections.reverse(path);
+        path.add(startNode);
+        for(AStarNode asn : path){
+            System.out.println(asn.x + ", " + asn.y);
+        }
+        
         return path;
     }
     

@@ -41,25 +41,39 @@ public class AStarNode {
     //Looking up 4 neighbors and adding to node;
     public ArrayList<AStarNode> generateSuccesors(){
         ArrayList<AStarNode> neighbors = new ArrayList<>();
-        if(x+1 <= md.getHeight()){
+        if(x+1 <= 9){
             AStarNode temp = new AStarNode(x+1,y);
-            temp.parent = this;
-            neighbors.add(temp);
+            if(!Tbm.blocked(temp)){
+                System.out.println("x+1 is true");
+                temp.parent = this;
+                neighbors.add(temp);
+            }
         }
-        if(x-1 > 0){
+        if(x-1 >= 0){
             AStarNode temp = new AStarNode(x-1,y);
-            temp.parent = this;
-            neighbors.add(temp);
+            if(!Tbm.blocked(temp)){
+                System.out.println("x-1 is true");
+                temp.parent = this;
+                neighbors.add(temp);
+            }
         }
-        if(y+1 <= md.getWidth()){
+        if(y+1 <= 5){
+            
             AStarNode temp = new AStarNode(x,y+1);
-            temp.parent = this;
-            neighbors.add(temp);
+            System.out.println(temp.x + ", "+ temp.y);
+            if(!Tbm.blocked(temp)){
+                System.out.println("y+1 is true");
+                temp.parent = this;
+                neighbors.add(temp);
+            }
         }
-        if(y-1 > 0){
+        if(y-1 >= 0){
             AStarNode temp = new AStarNode(x,y-1);
-            temp.parent = this;
-            neighbors.add(temp);
+            if(!Tbm.blocked(temp)){
+                System.out.println("y-1 is true");
+                temp.parent = this;
+                neighbors.add(temp);
+            }
         }
         return neighbors;
     }
