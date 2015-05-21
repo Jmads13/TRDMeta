@@ -7,6 +7,7 @@
 package dk.sdu.mmmi.cbse.enemy;
 
 import static com.decouplink.Utilities.context;
+import dk.sdu.mmmi.cbse.common.data.Depth;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameTime;
 import dk.sdu.mmmi.cbse.common.data.Health;
@@ -42,6 +43,7 @@ public class EnemyFactory{
         //BehaviorType set to Spawning
         context(enemy).add(EntityType.class, ENEMY);
         context(enemy).add(BehaviorType.class, BehaviorType.SPAWNING);
+        context(enemy).add(Depth.class, new Depth(100));
         context(enemy).add(GameTime.class, new GameTime(i*75));
         context(enemy).add(ImageAsset.class, new ImageAsset(url));
         context(enemy).add(Health.class, new Health(100));
