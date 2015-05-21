@@ -44,6 +44,8 @@ class Shooting implements IUpdateService {
 
             pos.x += velocity.vectorX;
             pos.y += velocity.vectorY;
+            Rotation rot = context(e).one(Rotation.class);
+            rot.angle++;
             }else{
                 e.setDestroyed(true);
             }
