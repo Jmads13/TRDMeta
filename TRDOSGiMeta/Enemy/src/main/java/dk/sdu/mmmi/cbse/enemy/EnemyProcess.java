@@ -10,6 +10,7 @@ import com.decouplink.Context;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameTime;
+import dk.sdu.mmmi.cbse.common.data.Health;
 import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
 import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.SPAWNING;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
@@ -36,6 +37,13 @@ public class EnemyProcess implements IUpdateService {
                     enemyCtx.one(GameTime.class).delta--;
                 }
                 
+            }
+            if(entity.isHit()){
+                context(entity).one(Health.class).addDamage(10);
+                entity.setHit(false);
+                if(!context(entity).one(Health.class).isAlive()){
+                    entity.setDestroyed(true);
+                }
             }
         }
     }

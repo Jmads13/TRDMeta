@@ -7,7 +7,7 @@ package dk.sdu.mmmi.cbse.common.data;
  */
 public final class Entity {
     
-    private boolean destroyed;
+    private boolean destroyed, hit;
     
     public boolean isDestroyed() {
         return destroyed;
@@ -15,6 +15,14 @@ public final class Entity {
 
     public void setDestroyed(boolean dead) {
         this.destroyed = dead;
+    }
+    
+    public void setHit(Boolean hit){
+        this.hit = hit;
+    }
+    
+    public boolean isHit(){
+        return hit;
     }
     
 }

@@ -7,6 +7,7 @@ package dk.sdu.mmmi.cbse.player;
 
 import com.decouplink.Context;
 import static com.decouplink.Utilities.context;
+import dk.sdu.mmmi.cbse.common.data.Depth;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameTime;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
@@ -46,6 +47,7 @@ public class PlayerProcess implements IUpdateService{
                     context(tower).add(EntityType.class, TOWER);
                     context(tower).add(BehaviorType.class, PLACING);
                     context(tower).add(GameTime.class, new GameTime(10));
+                    context(tower).add(Depth.class, new Depth(100f));
                     context(tower).add(Rotation.class, new Rotation());
                     context(tower).add(ImageAsset.class, new ImageAsset(url));
                     context(tower).add(Position.class, p);

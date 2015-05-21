@@ -13,6 +13,6 @@ public class Depth {
     public float depth;
     
     public Depth(float d){
-        this.depth = depth;
+        this.depth = d;
     }
 }

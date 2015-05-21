@@ -7,6 +7,7 @@ package dk.sdu.mmmi.cbse.pewpew;
 
 import com.decouplink.DisposableList;
 import static com.decouplink.Utilities.context;
+import dk.sdu.mmmi.cbse.common.data.Depth;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameTime;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
@@ -80,7 +81,7 @@ class Shooting implements IUpdateService {
         float dy = srcPos.y - targetPos.y;
 
         double dist = Math.sqrt((dx * dx) + (dy * dy));
-        boolean withinRange = dist <= 328; //Rewrite to range of tower
+        boolean withinRange = dist <= 200; //Rewrite to range of tower
 
         return withinRange;
     }
@@ -107,6 +108,7 @@ class Shooting implements IUpdateService {
         Entity bullet = new Entity();
         context(bullet).add(EntityType.class, BULLET);
         context(bullet).add(ImageAsset.class, new ImageAsset(url));
+        context(bullet).add(Depth.class, new Depth(100f));
         context(bullet).add(Position.class, new Position(p.x, p.y));
         context(bullet).add(Rotation.class, new Rotation(r.angle));
         context(bullet).add(Velocity.class, new Velocity((float) (Math.cos(r.angle) * 10), (float) (Math.sin(r.angle) * 10)));

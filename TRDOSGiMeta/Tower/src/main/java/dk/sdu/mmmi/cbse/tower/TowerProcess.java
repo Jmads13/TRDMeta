@@ -6,6 +6,7 @@
 package dk.sdu.mmmi.cbse.tower;
 
 import static com.decouplink.Utilities.context;
+import dk.sdu.mmmi.cbse.common.data.Depth;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameTime;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
@@ -50,13 +51,14 @@ class TowerProcess implements IUpdateService {
                         context(tower).add(Range.class, new Range(200));
                         context(tower).add(BehaviorType.class, BehaviorType.SHOOT);
                         context(tower).add(Rotation.class, new Rotation());
+                        context(tower).add(Depth.class, new Depth(100f));
                         context(tower).add(GameTime.class, new GameTime(10));
                         context(tower).add(ImageAsset.class, new ImageAsset(url));
                         context(tower).add(Position.class, (checkTile(tile)));
                         context(tower).add(Scale.class, new Scale(1f, 1f));
                         context(o).add(Entity.class, tower);
-                                    context(tile).remove(Available.AVAIL);
-            context(tile).add(Available.class, Available.BLOCKED);
+                        context(tile).remove(Available.AVAIL);
+                        context(tile).add(Available.class, Available.BLOCKED);
                     }
                 }
             }

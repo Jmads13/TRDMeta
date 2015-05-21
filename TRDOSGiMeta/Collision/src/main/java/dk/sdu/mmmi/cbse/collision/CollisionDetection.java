@@ -33,7 +33,8 @@ class CollisionDetection implements IUpdateService{
                     && context(target).one(BehaviorType.class) == BehaviorType.ASTAR){
                  if(context(e).one(EntityType.class).equals(EntityType.BULLET)){
                      if(checkCollision(e, target)){
-                         target.setDestroyed(true); //Taking dmg instead of killing it
+                         target.setHit(true); //Taking dmg instead of killing it
+                         e.setDestroyed(true);
                      }
                  }
             }

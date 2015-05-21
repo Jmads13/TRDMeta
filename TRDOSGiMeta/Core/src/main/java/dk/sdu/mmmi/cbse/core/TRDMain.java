@@ -122,10 +122,6 @@ public class TRDMain extends Game.Default {
                 backgroundLayer.remove(view);
                 context(world).remove(e);
             }
-            if(context(e).one(Depth.class) != null){
-                view.setDepth(context(e).one(Depth.class).depth);
-                //TODO hvis der opstår depth problemer
-            }
         }
     }
 
@@ -152,6 +148,11 @@ public class TRDMain extends Game.Default {
             }
 
         });
+        
+            if(context(entity).one(Depth.class) != null){
+                viewLayer.setDepth(context(entity).one(Depth.class).depth);
+                //TODO hvis der opstår depth problemer
+            }
 
         context(entity).add(ImageLayer.class, viewLayer);
         backgroundLayer.add(viewLayer);
