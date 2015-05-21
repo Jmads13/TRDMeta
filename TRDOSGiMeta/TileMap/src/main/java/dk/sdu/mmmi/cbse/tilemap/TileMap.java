@@ -13,6 +13,7 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Scale;
+import dk.sdu.mmmi.cbse.common.data.types.Available;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.MAPTILE;
 import dk.sdu.mmmi.cbse.common.data.types.MapTileType;
@@ -72,15 +73,19 @@ public class TileMap implements IContentService{
         switch(map[x][y]){
             case 0:
                 context(e).add(MapTileType.class, MapTileType.GRASS);
+                context(e).add(Available.class, Available.AVAIL);
                 return cl.getResource("assets/images/grass.png").toExternalForm();
             case 1:
                 context(e).add(MapTileType.class, MapTileType.DIRT);
+                context(e).add(Available.class, Available.BLOCKED);
                 return cl.getResource("assets/images/dirt.png").toExternalForm();
             case 2:
                 context(e).add(MapTileType.class, MapTileType.WATER);
+                context(e).add(Available.class, Available.BLOCKED);
                 return cl.getResource("assets/images/water.png").toExternalForm();
             default: 
                 context(e).add(MapTileType.class, MapTileType.GRASS);
+                context(e).add(Available.class, Available.AVAIL);
                 return cl.getResource("assets/images/grass.png").toExternalForm();
         }
 

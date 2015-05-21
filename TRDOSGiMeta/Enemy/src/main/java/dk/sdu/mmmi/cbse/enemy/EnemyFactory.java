@@ -43,7 +43,7 @@ public class EnemyFactory{
         //BehaviorType set to Spawning
         context(enemy).add(EntityType.class, ENEMY);
         context(enemy).add(BehaviorType.class, BehaviorType.SPAWNING);
-        context(enemy).add(Depth.class, new Depth(100));
+        context(enemy).add(Depth.class, new Depth(100f));
         context(enemy).add(GameTime.class, new GameTime(i*75));
         context(enemy).add(ImageAsset.class, new ImageAsset(url));
         context(enemy).add(Health.class, new Health(100));
