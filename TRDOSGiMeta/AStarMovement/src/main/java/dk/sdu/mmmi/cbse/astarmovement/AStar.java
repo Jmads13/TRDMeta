@@ -56,12 +56,10 @@ public class AStar implements IUpdateService{
                         if(ctx.one(Position.class).x == ctx.one(Point.class).x
                                 && ctx.one(Position.class).y == ctx.one(Point.class).y){
                             if(ctx.one(ChaseCounter.class) != null){
-                                System.out.println(ctx.one(ChaseCounter.class).i);
                                 ctx.one(ChaseCounter.class).i++;
                                 if(path.size()-1 > (ctx.one(ChaseCounter.class).i)){
                                     ctx.one(Point.class).x = (path.get(ctx.one(ChaseCounter.class).i).x*64)+32;
                                     ctx.one(Point.class).y = (path.get(ctx.one(ChaseCounter.class).i).y*64)+32;
-                                    System.out.println(ctx.one(Point.class).x +" : " + ctx.one(Point.class).y);
                                 }else{
                                     entity.setDestroyed(true);
                                 }//End of path
@@ -79,7 +77,6 @@ public class AStar implements IUpdateService{
         }else{
             path = aStaring(new AStarNode(0, 3), new AStarNode(9, 1));
         }
-            //aStaring(o, new AStarNode(0, 3), new AStarNode(9, 1));
     }
     
     //Singleton
@@ -113,29 +110,16 @@ public class AStar implements IUpdateService{
             open.remove(q);
             closed.add(q);
             for(AStarNode succesor : q.generateSuccesors()){
-                System.out.println("generated from :" + q.x + ", "+ q.y);
-                System.out.println("evaluating succesor: " + succesor.x + ", "+succesor.y);
                 if(closed.contains(succesor)){
-                    System.out.println("Closed contained " + succesor.x + ", "+succesor.y);
                 }else{
                     if(!open.contains(succesor)){
-                        System.out.println("Open didn't contain " + succesor.x + ", "+succesor.y);
                         succesor.g = q.g+1;
                         succesor.h = estimateDistance(succesor, goal);
                         succesor.f = succesor.g + succesor.h;
                         succesor.parent = q;
                         open.add(succesor);
-                    }else{
-                        float nextG = q.g + succesor.cost;
-                        if(nextG < succesor.g){
-                            open.remove(succesor);
-                            closed.add(succesor);
-                        }
                     }
-                    System.out.println("");
                     if(succesor.x == goal.x && succesor.y == goal.y){ //path found
-                        System.out.println("hurray A* have generated a path from: ("+ start.x+","+start.y + ") to ("+goal.x+","+goal.y+")");
-                        System.out.println("You derserve a beer!");
                         return reconstructPath(start, succesor);
                     }
                 }
@@ -156,10 +140,6 @@ public class AStar implements IUpdateService{
         }
         Collections.reverse(path);
         path.add(startNode);
-        for(AStarNode asn : path){
-            System.out.println(asn.x + ", " + asn.y);
-        }
-        
         return path;
     }
     
