@@ -112,12 +112,12 @@
     <module>Player</module>
     <module>Store</module>
     <module>Tower</module>
-    <module>PewPew</module>
     <module>BasicPathMovement</module>
     <module>Collision</module>
     <module>Enemy</module>
     <module>AStarMovement</module>
-  </modules>
+        <module>Ballistics</module>
+    </modules>
 
     <properties>
         <netbeans.version>RELEASE80</netbeans.version>

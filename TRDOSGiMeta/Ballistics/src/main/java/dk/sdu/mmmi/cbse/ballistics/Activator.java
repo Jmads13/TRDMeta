@@ -1,17 +1,21 @@
-package dk.sdu.mmmi.cbse.pewpew;
+package dk.sdu.mmmi.cbse.ballistics;
 
 import dk.sdu.mmmi.cbse.common.services.IUpdateService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator {
 
+    ServiceRegistration update;
+    @Override
     public void start(BundleContext context) throws Exception {
-        context.registerService(IUpdateService.class, new Shooting(), null);
+        update = context.registerService(IUpdateService.class, new Shooting(), null);
     }
 
+    @Override
     public void stop(BundleContext context) throws Exception {
-        // TODO add deactivation code here
+        context.ungetService(update.getReference());
     }
 
 }

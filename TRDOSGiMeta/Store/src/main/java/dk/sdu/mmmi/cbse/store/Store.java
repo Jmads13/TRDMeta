@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.cbse.store;
 
-import com.decouplink.DisposableList;
 import com.decouplink.Link;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
@@ -9,7 +8,6 @@ import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Scale;
 import dk.sdu.mmmi.cbse.common.data.types.EntitySubType;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
-import static dk.sdu.mmmi.cbse.common.data.types.EntityType.BULLET;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.SHOP;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
 import org.openide.util.Lookup;
@@ -26,37 +24,32 @@ import org.openide.util.Lookup;
  */
 public class Store implements IContentService{
 
-    DisposableList entities = new DisposableList();
+    Object o;
     
-    
-
     @Override
     public void add(Object o) {
-        
+        this.o = o;
 
         Link<Entity> bg = context(o).add(Entity.class, backGround(new Entity()));
-        entities.add(bg);
         
         Link<Entity> topRight = context(o).add(Entity.class, topRight(new Entity()));
-        entities.add(topRight);
         
         Link<Entity> topLeft = context(o).add(Entity.class, topLeft(new Entity()));
-        entities.add(topLeft);
         
         Link<Entity> derpHerp = context(o).add(Entity.class, herpDerp(new Entity()));
-        entities.add(derpHerp);
         
         Link<Entity> tankIcon = context(o).add(Entity.class, tankIcon(new Entity()));
-        entities.add(tankIcon);
             
         Link<Entity> gasIcon = context(o).add(Entity.class, gasChamberIcon(new Entity()));
-        entities.add(gasIcon);
-
     }
 
     @Override
     public void remove() {
-        entities.dispose();
+        for(Entity e : context(o).all(Entity.class)){
+            if(context(e).one(EntityType.class) == EntityType.SHOP){
+                e.setDestroyed(true);
+            }
+        }
     }
     
     private Entity backGround(Entity e){

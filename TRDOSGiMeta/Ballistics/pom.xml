@@ -8,11 +8,11 @@
   </parent>
 
     <groupId>dk.sdu.mmmi.cbse</groupId>
-    <artifactId>PewPew</artifactId>
+    <artifactId>Ballistics</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
-    <name>PewPew</name>
+    <name>Ballistics</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

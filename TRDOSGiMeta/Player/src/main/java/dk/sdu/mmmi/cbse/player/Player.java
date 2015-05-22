@@ -5,15 +5,12 @@
  */
 package dk.sdu.mmmi.cbse.player;
 
-import com.decouplink.DisposableList;
 import com.decouplink.Link;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.Scale;
-import dk.sdu.mmmi.cbse.common.data.types.BehaviorType;
-import static dk.sdu.mmmi.cbse.common.data.types.BehaviorType.PLACING;
 import dk.sdu.mmmi.cbse.common.data.types.EntityType;
 import static dk.sdu.mmmi.cbse.common.data.types.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.services.IContentService;
@@ -24,18 +21,22 @@ import org.openide.util.Lookup;
  * @author Pasoa
  */
 public class Player implements IContentService{
-    
-    DisposableList entities = new DisposableList();
 
+    Object o;
+    
     @Override
     public void add(Object o) {
+        this.o = o;
         Link<Entity> pl = context(o).add(Entity.class, createPlayer());
-        entities.add(pl);
     }
 
     @Override
     public void remove() {
-        entities.dispose();
+        for(Entity e : context(o).all(Entity.class)){
+            if(context(e).one(EntityType.class) == EntityType.PLAYER){
+                e.setDestroyed(true);
+            }
+        }
     }
     
     public Entity createPlayer() {

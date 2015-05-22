@@ -55,10 +55,8 @@ public class AStarNode {
                 neighbors.add(temp);
             }
         }
-        if(y+1 <= 5){
-            
+        if(y+1 <= md.getHeight()){
             AStarNode temp = new AStarNode(x,y+1);
-            System.out.println(temp.x + ", "+ temp.y);
             if(!Tbm.blocked(temp)){
                 temp.parent = this;
                 neighbors.add(temp);

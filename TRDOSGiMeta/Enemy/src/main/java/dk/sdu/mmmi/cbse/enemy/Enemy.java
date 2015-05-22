@@ -5,7 +5,6 @@
  */
 package dk.sdu.mmmi.cbse.enemy;
 
-import com.decouplink.DisposableList;
 import com.decouplink.Link;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
@@ -26,7 +25,6 @@ import org.w3c.dom.NodeList;
  */
 public class Enemy implements IContentService {
 
-    DisposableList entities = new DisposableList();
     Object o;
 
     @Override
@@ -61,7 +59,6 @@ public class Enemy implements IContentService {
         for (int i = 0; i < waveEnemyCount; i++) {
             Entity e = EnemyFactory.createEnemy(i, new Velocity(1, 0));
             Link<Entity> el = context(world).add(Entity.class, e);
-            entities.add(el);
         }
 
     }

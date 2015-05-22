@@ -6,7 +6,6 @@
 
 package dk.sdu.mmmi.cbse.tilemap;
 
-import com.decouplink.DisposableList;
 import com.decouplink.Link;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
@@ -26,12 +25,13 @@ import org.openide.util.Lookup;
  */
 public class TileMap implements IContentService{
 
-    DisposableList entities = new DisposableList();
     private int width = 10, height = 6;
     private int tileSize = 64;
+    Object o;
     
     @Override
     public void add(Object o) {
+        this.o = o;
         System.out.println("init map tile");
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -42,7 +42,6 @@ public class TileMap implements IContentService{
                 context(e).add(Scale.class, new Scale(1.0f, 1.0f));
                 
                 Link<Entity> el = context(o).add(Entity.class, e);
-                entities.add(el);
             }
         }
         
@@ -51,7 +50,11 @@ public class TileMap implements IContentService{
 
     @Override
     public void remove() {
-        entities.dispose();
+        for(Entity e : context(o).all(Entity.class)){
+            if(context(e).one(EntityType.class) == EntityType.MAPTILE){
+                e.setDestroyed(true);
+            }
+        }
     }
     
     int[][] map = {

@@ -10,11 +10,13 @@ public class Activator implements BundleActivator {
 
     ServiceRegistration content;
     ServiceRegistration update;
+    @Override
     public void start(BundleContext context) throws Exception {
         content = context.registerService(IContentService.class, new Player(), null);
         update = context.registerService(IUpdateService.class, new PlayerProcess(), null);
     }
 
+    @Override
     public void stop(BundleContext context) throws Exception {
         IContentService player = (IContentService) context.getService(content.getReference());
         player.remove();

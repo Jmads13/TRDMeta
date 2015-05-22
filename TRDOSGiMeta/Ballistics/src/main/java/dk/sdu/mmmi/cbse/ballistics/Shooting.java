@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package dk.sdu.mmmi.cbse.pewpew;
+package dk.sdu.mmmi.cbse.ballistics;
 
-import com.decouplink.DisposableList;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Depth;
 import dk.sdu.mmmi.cbse.common.data.Entity;
@@ -29,8 +23,6 @@ import org.openide.util.Lookup;
  * @author Pasoa
  */
 class Shooting implements IUpdateService {
-
-    DisposableList disposables = new DisposableList();
     
     public Shooting() {
     }
@@ -51,9 +43,7 @@ class Shooting implements IUpdateService {
             }
         }
         
-        List<Entity> entities = new ArrayList<Entity>(context(o).all(Entity.class));
-        //Collections.reverse(entities);
-        disposables.dispose();  
+        List<Entity> entities = new ArrayList<Entity>(context(o).all(Entity.class));  
         
         for(Entity target : entities){
             if(context(target).one(EntityType.class).equals(EntityType.ENEMY)

@@ -19,27 +19,26 @@ public class Activator implements BundleActivator {
     @Override
     public void start(BundleContext context) throws Exception {
         this.context = context;
-        System.out.println("blah");
         ScheduledExecutorService s = Executors.newSingleThreadScheduledExecutor();
-    
         s.scheduleAtFixedRate(dynInstaller, 3000, 3000, TimeUnit.MILLISECONDS);
-
+        System.out.println("DynUpdater started, checking for plugins");
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        System.out.println("DynUpdater has been stopped..");
+        System.out.println("DynUpdater has been stopped");
     }
 
     private final Runnable dynInstaller = new Runnable() {
 
         @Override
         public void run() {
-            System.out.println("Scanning for services..");
+            //Checking if plugin folder exists, creating it if it does not
             File folder = new File(".//plugins");
             if(!folder.exists()) {
                 folder.mkdir();
             }
+            //Checking for new plugins
             for (File file : folder.listFiles()) {
                 if (file.getName().endsWith(".jar") && !jarList.containsKey(file)) {
                     try {
@@ -52,7 +51,7 @@ public class Activator implements BundleActivator {
                     }
                 }
             }
-            System.out.println("Checking for removed services");
+            //Checking for removed plugins
             for(File jar : jarList.keySet()) {
                 if(!jar.exists()) {
                     try {
@@ -60,7 +59,7 @@ public class Activator implements BundleActivator {
                         context.getBundle(jarList.get(jar)).stop();
                         jarList.remove(jar);
                     } catch (BundleException ex) {
-                        Logger.getLogger(Activator.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println(ex);
                     }
                 }
             }

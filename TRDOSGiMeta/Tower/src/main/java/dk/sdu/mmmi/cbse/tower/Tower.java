@@ -1,8 +1,5 @@
 package dk.sdu.mmmi.cbse.tower;
 
-
-import com.decouplink.DisposableList;
-import com.decouplink.Link;
 import static com.decouplink.Utilities.context;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.ImageAsset;
@@ -20,13 +17,11 @@ import org.openide.util.Lookup;
  */
 public class Tower implements IContentService {
     
-    DisposableList entities = new DisposableList();
+    Object o;
     
     @Override
     public void add(Object world){
-        //Entity to = createTower();
-        //Link<Entity> tow = context(world).add(Entity.class, to);
-        //entities.add(tow);
+        this.o = world;
     }
     
     public static Entity createTower(){
@@ -46,7 +41,11 @@ public class Tower implements IContentService {
     
     @Override
     public void remove(){
-        entities.dispose();
+        for(Entity e : context(o).all(Entity.class)){
+            if(context(e).one(EntityType.class) == EntityType.TOWER){
+                e.setDestroyed(true);
+            }
+        }
     }
     
 }
